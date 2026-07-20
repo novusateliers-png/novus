@@ -106,7 +106,7 @@
            ========================================================================== */
         .site-header { 
             position: fixed; top: 0; width: 100%; 
-            padding: calc(var(--space-sm) * 0.8) 0; 
+            padding: calc(var(--space-sm) * 0.5) 0; /* Altezza abbassata */
             z-index: 1000; transition: padding 0.4s var(--ease-out-expo), background-color 0.5s ease, color 0.5s ease;
             background-color: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(16px);
@@ -718,7 +718,11 @@
                 </div>
                 
                 <div class="js-reveal">
+                    <!-- Form aggiornato con campi nascosti per FormSubmit -->
                     <form class="contact-form js-form" action="#" method="POST">
+                        <input type="hidden" name="_subject" value="Nuova richiesta dal sito Novus Ateliers">
+                        <input type="hidden" name="_captcha" value="false">
+                        
                         <div class="input-group">
                             <label for="name" class="input-label">Nome e Azienda *</label>
                             <input type="text" id="name" name="name" class="premium-input" required>
@@ -756,7 +760,7 @@
             <p>La presente Privacy Policy descrive le modalità di gestione del sito web in riferimento al trattamento dei dati personali degli utenti che lo consultano e che interagiscono con i nostri servizi web (form di contatto).</p>
             
             <h4>1. Titolare del Trattamento</h4>
-            <p>Novus Ateliers.<br>Email: novus.ateliers@gmail.com<br>P.IVA: [INSERIRE P.IVA]</p>
+            <p>Novus Ateliers.<br>Email: novus.ateliers@gmail.com<br></p>
             
             <h4>2. Tipologia di dati trattati e finalità</h4>
             <p><strong>Dati forniti volontariamente dall'utente:</strong> L'invio facoltativo, esplicito e volontario di messaggi tramite il modulo di contatto o agli indirizzi indicati su questo sito comporta la successiva acquisizione dell'indirizzo del mittente, necessario per rispondere alle richieste, nonché degli eventuali altri dati personali inseriti nella missiva (es. Nome, Azienda, Dettagli del Progetto).</p>
@@ -793,7 +797,7 @@
     <footer style="background: var(--color-dark); color: white; padding: var(--space-lg) 0 var(--space-md) 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
         <p style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem;">&copy; 2026 Novus Ateliers. Architecture for the web.</p>
         <p style="font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-bottom: 2rem; font-family: var(--font-sans);">
-            Novus Ateliers | P.IVA: [INSERIRE P.IVA]
+            Novus Ateliers 
         </p>
         <div style="display: flex; justify-content: center; gap: 2rem; font-size: 0.7rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.05em;">
             <button class="js-open-modal" data-target="privacy-modal" style="background:none; border:none; color: rgba(255,255,255,0.4); font-size:inherit; font-family:inherit; text-decoration: none; transition: color 0.3s; cursor: pointer; letter-spacing: inherit;" onmouseover="this.style.color='var(--color-white)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Privacy Policy</button>
@@ -908,30 +912,41 @@
                 }
 
                 if(window.scrollY > 50) {
-                    header.style.padding = '12px 0'; 
+                    header.style.padding = '8px 0'; /* Altezza abbassata in fase di scroll */
                 } else {
-                    header.style.padding = 'calc(var(--space-sm) * 0.8) 0';
+                    header.style.padding = 'calc(var(--space-sm) * 0.5) 0'; /* Altezza iniziale abbassata */
                 }
             }, { passive: true });
 
-            /* --- 5. Validazione e Invio Form --- */
+            /* --- 5. Validazione e Invio Form tramite FormSubmit --- */
             const contactForm = document.querySelector('.js-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const submitBtn = contactForm.querySelector('.btn-submit span');
                     
-                    submitBtn.textContent = "Elaborazione...";
+                    submitBtn.textContent = "Invio in corso...";
                     contactForm.querySelector('button').disabled = true;
 
-                    setTimeout(() => {
+                    const formData = new FormData(contactForm);
+
+                    fetch("https://formsubmit.co/ajax/novus.ateliers@gmail.com", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
                         contactForm.parentElement.innerHTML = `
                             <div style="padding: var(--space-md) 0; border-top: 1px solid rgba(0,0,0,0.1);">
                                 <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Ricevuto.</h3>
                                 <p style="color: #444; font-size: 1rem; font-weight: 300;">La tua richiesta è nel nostro sistema. Sarai ricontattato entro 24 ore dal nostro team.</p>
                             </div>
                         `;
-                    }, 1500);
+                    })
+                    .catch(error => {
+                        submitBtn.textContent = "Errore. Riprova.";
+                        contactForm.querySelector('button').disabled = false;
+                    });
                 });
             }
         });
