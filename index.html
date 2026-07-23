@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Novus Ateliers | Digital Agency & Ingegneria del Valore</title>
+    <title>Novus Ateliers | Enterprise Digital Architecture</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,26 +11,29 @@
 
     <style>
         /* ==========================================================================
-           1. CORE SYSTEM & TOKENS PRESTIGIOSI
+           1. CORE SYSTEM & TOKENS ENTERPRISE
            ========================================================================== */
         :root {
             --color-white: #FFFFFF;
-            --color-stone: #F5F5F2; 
-            --color-dark: #0A0A0A;  
-            --color-dark-alt: #111111;
+            --color-stone: #F9F9F7; /* Ancora più luminoso ed elegante */
+            --color-dark: #070707;  
+            --color-dark-alt: #121212;
             --color-accent: #B29054; 
+            --color-border-dark: rgba(255, 255, 255, 0.1);
+            --color-border-light: rgba(0, 0, 0, 0.08);
             
             --font-serif: 'Instrument Serif', Georgia, serif;
             --font-sans: 'Manrope', system-ui, sans-serif;
             
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
 
-            --space-xs: clamp(0.75rem, 0.69rem + 0.29vw, 1rem);
-            --space-sm: clamp(1rem, 0.88rem + 0.58vw, 1.5rem);
-            --space-md: clamp(1.5rem, 1.38rem + 0.58vw, 2rem);
-            --space-lg: clamp(2.5rem, 2rem + 2.5vw, 4rem);
-            --space-xl: clamp(4rem, 3rem + 4vw, 6rem);
-            --space-section: clamp(5rem, 4.5rem + 5vw, 8rem);
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+            --space-section: clamp(6rem, 8vw, 10rem);
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,28 +50,34 @@
             overflow-x: hidden; 
         }
 
+        /* Noise leggerissimo per texture elegante */
         .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9999; opacity: 0.25; 
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999; opacity: 0.03; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             mix-blend-mode: multiply;
         }
-        body.dark-mode .noise-overlay { mix-blend-mode: overlay; opacity: 0.1; }
+        .dark-mode .noise-overlay { mix-blend-mode: overlay; opacity: 0.04; }
 
         a, button { outline: none; cursor: pointer; text-decoration: none; color: inherit; }
         
-        .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--space-md); position: relative; }
-        .section { padding: var(--space-section) 0; }
+        .container { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 var(--space-md); position: relative; }
         
         /* TIPOGRAFIA & ANIMAZIONI TITOLI */
         h2 { 
-            font-size: clamp(2.5rem, 2rem + 4vw, 5.5rem); 
+            font-size: clamp(3rem, 2rem + 4vw, 5.5rem); 
             letter-spacing: -0.03em; 
             font-family: var(--font-serif); 
             font-weight: 400; 
             line-height: 0.95; 
-            margin-bottom: var(--space-lg);
+            margin-bottom: var(--space-md);
         }
+        .section-subtitle {
+            font-size: 1.1rem; color: rgba(0,0,0,0.6); max-width: 600px;
+            font-weight: 400; margin-bottom: var(--space-lg); line-height: 1.6;
+        }
+        .dark-mode .section-subtitle { color: rgba(255,255,255,0.6); }
+
         .italic-accent { font-style: italic; color: var(--color-accent); }
 
         .wow-title .mask { display: inline-block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; vertical-align: bottom; }
@@ -81,23 +90,22 @@
         .js-wow-reveal.is-revealed .mask:nth-child(2) .text { transition-delay: 0.05s; }
         .js-wow-reveal.is-revealed .mask:nth-child(3) .text { transition-delay: 0.1s; }
 
-        /* BUTTONS - Design minimalista e tecnico */
+        /* BUTTONS - Stile Corporate Premium */
         .btn-premium { 
             display: inline-flex; align-items: center; justify-content: center;
-            padding: calc(var(--space-sm) * 0.7) calc(var(--space-md) * 1); 
-            min-height: 44px;
+            padding: 0 2rem; height: 50px;
             background: var(--color-dark); color: var(--color-white); 
-            font-family: var(--font-sans); font-weight: 500; font-size: 0.8rem; 
-            text-transform: uppercase; letter-spacing: 0.05em; border-radius: 2px;
-            position: relative; overflow: hidden; transition: all 0.4s ease; border: 1px solid var(--color-dark);
+            font-family: var(--font-sans); font-weight: 600; font-size: 0.8rem; 
+            text-transform: uppercase; letter-spacing: 0.08em; border-radius: 4px;
+            transition: all 0.4s var(--ease-out-circ); border: 1px solid var(--color-dark);
         }
         .btn-premium:hover { 
             background: var(--color-accent); 
             border-color: var(--color-accent);
-            color: var(--color-white); 
+            color: var(--color-white);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(178, 144, 84, 0.2);
         }
-        .btn-premium span { position: relative; z-index: 2; }
-        
         .dark-mode .btn-premium { background: var(--color-white); color: var(--color-dark); border-color: var(--color-white); }
         .dark-mode .btn-premium:hover { background: var(--color-accent); color: var(--color-white); border-color: var(--color-accent); }
 
@@ -105,54 +113,79 @@
            2. HEADER & MENU MOBILE
            ========================================================================== */
         .site-header { 
-            position: fixed; top: 0; width: 100%; 
-            padding: calc(var(--space-sm) * 0.5) 0; /* Altezza abbassata */
-            z-index: 1000; transition: padding 0.4s var(--ease-out-expo), background-color 0.5s ease, color 0.5s ease;
-            background-color: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            position: fixed; top: 0; width: 100%; height: 90px;
+            z-index: 1000; transition: background-color 0.4s, color 0.4s, height 0.4s;
+            background-color: transparent;
             color: var(--color-white);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex; align-items: center;
         }
-        .site-header.light-mode {
-            background-color: rgba(245, 245, 242, 0.9);
-            color: var(--color-dark);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        .site-header.scrolled { 
+            height: 70px; background-color: rgba(7, 7, 7, 0.9); 
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border-dark);
+        }
+        .site-header.light-mode { color: var(--color-dark); }
+        .site-header.light-mode.scrolled { 
+            background-color: rgba(249, 249, 247, 0.9); 
+            border-bottom-color: var(--color-border-light); 
         }
         
-        .header-inner { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; letter-spacing: 0.02em; z-index: 1010; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         
-        .nav-links { display: none; gap: var(--space-lg); align-items: center; }
-        .nav-links a { font-size: 0.8rem; font-weight: 500; position: relative; opacity: 0.8; transition: opacity 0.3s ease; }
-        .nav-links a:hover { opacity: 1; }
-        .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0%; height:1px; background:currentColor; transition:width 0.4s var(--ease-out-expo); }
-        .nav-links a:hover::after { width: 100%; }
+        /* LOGO TIPOGRAFICO ELEGANTE */
+        .brand-logo { display: flex; align-items: center; gap: 12px; }
+        .logo-mark {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-style: italic;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+        .logo-text {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding-top: 4px;
+        }
+
+        .nav-links { display: none; gap: 2.5rem; align-items: center; height: 100%; }
+        .nav-links a:not(.btn-premium) { 
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase; 
+            letter-spacing: 0.1em; opacity: 0.7; transition: opacity 0.3s; position: relative;
+        }
+        .nav-links a:not(.btn-premium):hover { opacity: 1; }
+        .nav-links a:not(.btn-premium)::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+            background-color: var(--color-accent); transition: width 0.3s ease;
+        }
+        .nav-links a:not(.btn-premium):hover::after { width: 100%; }
+        .nav-links .btn-premium { height: 42px; padding: 0 1.5rem; }
 
         .mobile-nav {
-            position: fixed; top: 0; right: 0; width: 50vw; height: 50vh;
-            background: var(--color-dark); display: flex; flex-direction: column;
+            position: fixed; top: 0; right: 0; width: 100vw; height: 100vh;
+            background: rgba(7, 7, 7, 0.98); backdrop-filter: blur(10px);
+            display: flex; flex-direction: column;
             justify-content: center; align-items: center; gap: var(--space-md);
             padding: var(--space-md); 
-            transform: translateX(100%); transition: transform 0.8s var(--ease-out-expo);
+            transform: translateX(100%); transition: transform 0.6s var(--ease-out-expo);
             z-index: 999;
-            border-bottom-left-radius: 20px;
-            box-shadow: -5px 5px 20px rgba(0,0,0,0.3);
         }
         .mobile-nav.active { transform: translateX(0); }
-        .mobile-nav a { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; color: var(--color-white); letter-spacing: -0.02em; text-align: center;}
+        .mobile-nav a { font-family: var(--font-serif); font-size: 3.5rem; font-weight: 400; color: var(--color-white); }
         
         .menu-toggle {
             display: block; background: none; border: none; cursor: pointer;
-            width: 24px; height: 16px; position: relative; z-index: 1010; color: inherit;
+            width: 30px; height: 18px; position: relative; z-index: 1010; color: inherit;
         }
         .menu-toggle span {
-            display: block; width: 100%; height: 1px; background-color: currentColor;
+            display: block; width: 100%; height: 2px; background-color: currentColor;
             position: absolute; left: 0; transition: transform 0.4s var(--ease-out-expo), top 0.4s, bottom 0.4s;
         }
         .menu-toggle span:first-child { top: 0; }
         .menu-toggle span:last-child { bottom: 0; }
-        .menu-open .menu-toggle span:first-child { transform: rotate(45deg); top: 7px; color: var(--color-white); }
+        .menu-open .menu-toggle span:first-child { transform: rotate(45deg); top: 8px; color: var(--color-white); }
         .menu-open .menu-toggle span:last-child { transform: rotate(-45deg); bottom: 8px; color: var(--color-white); }
 
         @media (min-width: 1024px) { 
@@ -162,7 +195,7 @@
         }
 
         /* ==========================================================================
-           3. HERO (Elemento 3D Mantenuto)
+           3. HERO (Elemento 3D Intatto)
            ========================================================================== */
         .hero { 
             min-height: 100vh; display: flex; align-items: center; 
@@ -175,8 +208,8 @@
         }
         @media (min-width: 1024px) { 
             .hero-layout { flex-direction: row; align-items: center; justify-content: space-between; } 
-            .hero-title { width: 55%; }
-            .hero-visual { width: 45%; }
+            .hero-title { width: 60%; }
+            .hero-visual { width: 40%; }
         }
 
         .hero-title { display: flex; flex-direction: column; }
@@ -189,12 +222,12 @@
         .hero-title .line:nth-child(2) span { font-family: var(--font-sans); font-weight: 300; font-size: clamp(2.5rem, 6vw, 7.5rem); letter-spacing: -0.04em; }
         
         .hero-subtitle { 
-            margin-top: var(--space-md); font-size: clamp(1rem, 1vw, 1.15rem); 
-            color: rgba(255,255,255,0.6); max-width: 480px; font-weight: 400; line-height: 1.6;
+            margin-top: var(--space-md); font-size: clamp(1rem, 1vw, 1.25rem); 
+            color: rgba(255,255,255,0.7); max-width: 500px; font-weight: 300; line-height: 1.6;
             opacity: 0; transform: translateY(20px);
         }
 
-        /* 3D Abstract Glassmorphism UI - INTATTO ma integrato con nuovi colori */
+        /* 3D Abstract Glassmorphism UI - INTATTO */
         .hero-visual { 
             position: relative; height: 350px; width: 100%; perspective: 1200px; 
             display: flex; justify-content: center; align-items: center;
@@ -223,178 +256,159 @@
         @keyframes orbit { 100% { transform: rotate(360deg); } }
 
         /* ==========================================================================
-           8. MANIFESTO (Bento Grid) - Redesign Minimalista
+           4. PROCESSO OPERATIVO (Nuova Grafica Elegante e Rassicurante)
            ========================================================================== */
-        .features-section {
-            padding-bottom: var(--space-section);
-            padding-top: 0;
-            margin-top: 0;
-            background-color: var(--color-dark);
-            color: var(--color-stone);
-        }
-        .section-header { margin-bottom: var(--space-lg); border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: var(--space-md); }
-        .section-title-modern { font-family: var(--font-serif); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1; font-weight: 400; letter-spacing: -0.02em; }
+        .process-section { padding: var(--space-section) 0; background: var(--color-stone); }
         
-        .bento-grid { 
-            display: flex; 
-            overflow-x: auto; 
-            gap: 1px; 
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            background: rgba(255,255,255,0.05);
-            margin: 0 calc(var(--space-md) * -1);
-            padding: 1px;
+        .process-grid {
+            display: grid; grid-template-columns: 1fr; gap: var(--space-xl);
+            margin-top: var(--space-lg); position: relative;
         }
-        .bento-grid::-webkit-scrollbar { display: none; }
         
-        .bento-card {
-            flex: 0 0 85vw;
-            scroll-snap-align: center;
-            background: var(--color-dark); 
-            padding: var(--space-lg) var(--space-md); 
-            display: flex; flex-direction: column;
-            justify-content: space-between;
-            transition: background-color 0.4s;
-        }
-        .bento-card:hover { background: var(--color-dark-alt); }
-        .bento-card h3 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; margin-bottom: var(--space-sm); line-height: 1.1; }
-        .bento-card p { color: rgba(240, 239, 234, 0.6); font-size: 0.95rem; line-height: 1.6; font-weight: 300; }
-        .bento-number { font-family: var(--font-sans); font-weight: 300; font-size: 1rem; color: var(--color-accent); margin-bottom: auto; padding-bottom: var(--space-sm); }
-
         @media (min-width: 768px) {
-            .bento-grid { 
-                display: grid; 
-                grid-template-columns: repeat(3, 1fr); 
-                grid-auto-rows: minmax(300px, auto); 
-                overflow-x: visible; 
-                margin: 0; 
-            }
-            .bento-card { flex: auto; scroll-snap-align: none; }
-            .bento-large { grid-column: span 2; }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .process-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
         }
 
-        /* ==========================================================================
-           5. METODOLOGIA
-           ========================================================================== */
-        .services-section { background: var(--color-stone); }
-        .services-grid { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid rgba(0,0,0,0.1); }
-        @media (min-width: 768px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
-
-        .service-card {
-            background: transparent; padding: var(--space-lg) var(--space-sm) var(--space-lg) 0; border: none;
-            border-bottom: 1px solid rgba(0,0,0,0.1); border-radius: 0;
-            display: flex; flex-direction: column; transition: background-color 0.4s ease;
+        .process-step {
+            position: relative; padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border-light);
             opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo), background-color 0.4s ease;
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
         }
-        @media (min-width: 768px) { .service-card { border-bottom: none; border-right: 1px solid rgba(0,0,0,0.1); padding: var(--space-lg); } .service-card:last-child { border-right: none; } }
         
-        .services-grid.is-revealed .service-card { opacity: 1; transform: translateY(0); }
-        .services-grid.is-revealed .service-card:nth-child(1) { transition-delay: 0.1s; }
-        .services-grid.is-revealed .service-card:nth-child(2) { transition-delay: 0.25s; }
-        .services-grid.is-revealed .service-card:nth-child(3) { transition-delay: 0.4s; }
+        .process-grid.is-revealed .process-step { opacity: 1; transform: translateY(0); }
+        .process-grid.is-revealed .process-step:nth-child(1) { transition-delay: 0.1s; }
+        .process-grid.is-revealed .process-step:nth-child(2) { transition-delay: 0.2s; }
+        .process-grid.is-revealed .process-step:nth-child(3) { transition-delay: 0.3s; }
+        .process-grid.is-revealed .process-step:nth-child(4) { transition-delay: 0.4s; }
 
-        .card-number { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: var(--color-dark); opacity: 0.4; line-height: 1; margin-bottom: var(--space-md); }
-        .service-card h3 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; letter-spacing: -0.02em; margin-bottom: 1rem; line-height: 1.1; }
-        .service-card p { font-size: 0.95rem; color: #444; line-height: 1.6; font-weight: 300; }
+        .process-step::before {
+            content: ''; position: absolute; top: -3px; left: 0;
+            width: 40px; height: 5px; background: var(--color-accent);
+            transition: width 0.4s ease;
+        }
+        .process-step:hover::before { width: 100%; }
+
+        .step-number { font-family: var(--font-serif); font-size: 4rem; color: rgba(0,0,0,0.05); line-height: 1; margin-bottom: 1rem; }
+        .process-step h3 { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--color-dark); }
+        .process-step p { font-size: 0.95rem; color: #555; line-height: 1.6; }
+
 
         /* ==========================================================================
-           6. CASI STUDIO - Layout Editoriale
+           5. CASI STUDIO - Altezza Controllata
            ========================================================================== */
-        .cases-section { background: var(--color-dark); color: var(--color-white); position: relative; }
+        .cases-section { background: var(--color-dark); color: var(--color-white); padding: var(--space-section) 0; }
         
-        .case-list { 
-            display: flex; flex-direction: column; 
-            gap: calc(var(--space-section) * 1);
-        }
+        .case-list { display: flex; flex-direction: column; gap: var(--space-section); }
 
         .case-block { 
-            display: grid; grid-template-columns: 1fr; gap: var(--space-md); 
+            display: grid; grid-template-columns: 1fr; gap: var(--space-lg); 
+            align-items: center;
         }
         @media (min-width: 1024px) { 
-            .case-block { grid-template-columns: 1.2fr 0.8fr; gap: var(--space-xl); align-items: center; } 
-            .case-block:nth-child(even) { grid-template-columns: 0.8fr 1.2fr; }
+            .case-block { grid-template-columns: 1.2fr 1fr; gap: var(--space-xl); } 
+            .case-block:nth-child(even) { grid-template-columns: 1fr 1.2fr; }
             .case-block:nth-child(even) .case-visual-wrapper { order: 2; }
             .case-block:nth-child(even) .case-info { order: 1; }
         }
         
+        .case-visual-wrapper { width: 100%; }
+        
+        /* Modifica richiesta: Altezza limitata e aspect-ratio */
         .case-visual { 
-            display: block; width: 100%; aspect-ratio: 16/9; 
-            overflow: hidden; position: relative; cursor: pointer;
-            background: #1a1a1a;
+            display: block; width: 100%; 
+            aspect-ratio: 16/9; max-height: 480px; /* Limite per evitare eccessiva altezza */
+            overflow: hidden; position: relative; cursor: pointer; 
+            border-radius: 4px; background: #111;
         }
-        .case-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; filter: grayscale(20%); }
-        .case-visual:hover img { transform: scale(1.03); opacity: 1; filter: grayscale(0%); }
+        .case-visual img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 1.2s var(--ease-out-expo), opacity 0.4s; }
+        .case-visual:hover img { transform: scale(1.03); opacity: 1; }
         
         .case-info { display: flex; flex-direction: column; justify-content: center; }
         
-        .case-tag { 
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; 
-            color: var(--color-accent); font-weight: 500; display: inline-block; margin-bottom: var(--space-sm);
-        }
-        
-        .case-header-meta { margin-bottom: var(--space-md); }
-        .case-client { font-family: var(--font-serif); font-size: clamp(3rem, 5vw, 5rem); line-height: 0.9; margin: 0 0 0.5rem 0; letter-spacing: -0.02em; }
-        
-        .case-info p { color: rgba(255, 255, 255, 0.6); font-size: 1.05rem; line-height: 1.6; margin-bottom: var(--space-md); font-weight: 300; max-width: 90%; }
-        
-        .case-data-grid { 
-            display: grid; grid-template-columns: 1fr; gap: var(--space-sm); 
-            padding: var(--space-md) 0; 
-            border-top: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: var(--space-md); 
-        }
-        @media (min-width: 768px) { .case-data-grid { grid-template-columns: 1fr 1fr; } }
+        .case-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); font-weight: 700; display: inline-block; margin-bottom: 1rem; }
+        .case-client { font-family: var(--font-serif); font-size: clamp(3rem, 4vw, 4.5rem); line-height: 1; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .case-info p.desc { color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem; font-weight: 300; }
 
-        .data-box h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.4); margin-bottom: 0.3rem; font-weight: 500; }
-        .data-box p { font-size: 0.95rem; font-weight: 300; margin-bottom: 0; color: var(--color-white); }
-        .data-box .highlight { color: var(--color-white); font-weight: 400; }
-
-        .case-block .case-info > div > * {
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-        }
-        .case-block.is-revealed .case-info > div:first-child .case-tag { transition-delay: 0.1s; }
-        .case-block.is-revealed .case-info > div:first-child .case-header-meta { transition-delay: 0.2s; }
-        .case-block.is-revealed .case-info > div:first-child p { transition-delay: 0.3s; }
-        .case-block.is-revealed .case-info > div:last-child .case-data-grid { transition-delay: 0.4s; }
-        .case-block.is-revealed .case-info > div:last-child .btn-premium { transition-delay: 0.5s; }
-        
-        .case-block.is-revealed .case-info > div > * { opacity: 1; transform: translateY(0); }
+        .case-block.js-reveal > * { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+        .case-block.is-revealed > * { opacity: 1; transform: translateY(0); }
 
         /* ==========================================================================
-           7. CONTATTI - Modulo essenziale e pulito
+           6. FAQ - Domande Frequenti (Nuova Sezione)
            ========================================================================== */
-        .contact-section { background: var(--color-stone); border-top: 1px solid rgba(0,0,0,0.05); }
-        .contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); }
-        @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1.2fr 1fr; gap: var(--space-xl); } }
+        .faq-section { background: var(--color-stone); padding: var(--space-section) 0; }
+        
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        
+        .faq-item { border-bottom: 1px solid var(--color-border-light); }
+        .faq-item:first-child { border-top: 1px solid var(--color-border-light); }
+        
+        .faq-question {
+            width: 100%; text-align: left; background: none; border: none;
+            padding: 1.5rem 0; font-family: var(--font-sans); font-size: 1.15rem; font-weight: 600;
+            color: var(--color-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: color 0.3s ease;
+        }
+        .faq-question:hover { color: var(--color-accent); }
+        
+        .faq-icon {
+            position: relative; width: 14px; height: 14px; flex-shrink: 0; margin-left: 1rem;
+        }
+        .faq-icon::before, .faq-icon::after {
+            content: ''; position: absolute; background-color: currentColor; transition: transform 0.3s ease;
+        }
+        .faq-icon::before { top: 6px; left: 0; width: 14px; height: 2px; }
+        .faq-icon::after { top: 0; left: 6px; width: 2px; height: 14px; }
+        
+        .faq-item.active .faq-icon::after { transform: rotate(90deg); opacity: 0; }
+        
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out-circ), padding 0.4s ease;
+        }
+        .faq-item.active .faq-answer { padding-bottom: 1.5rem; }
+        .faq-answer p { color: #555; font-size: 1rem; line-height: 1.6; font-weight: 400; }
 
-        .contact-info h2 { font-size: clamp(3rem, 5vw, 5.5rem); margin-bottom: var(--space-md); }
-        .contact-email { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 400; color: var(--color-dark); border-bottom: 1px solid var(--color-dark); padding-bottom: 0.2rem; display: inline-block; margin-bottom: var(--space-lg); transition: color 0.3s, border-color 0.3s; }
-        .contact-email:hover { color: var(--color-accent); border-color: var(--color-accent); }
+        /* ==========================================================================
+           7. CONTATTI - Modulo Consulenziale Umanizzato
+           ========================================================================== */
+        .contact-section { background: var(--color-white); padding: var(--space-section) 0; border-top: 1px solid rgba(0,0,0,0.05); }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-xl); }
+        @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+
+        .contact-info p { margin-bottom: 2.5rem; color: #555; max-width: 450px; font-weight: 400; font-size: 1.1rem; line-height: 1.6; }
+        .contact-info a.email-link { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 500; color: var(--color-dark); border-bottom: 1px solid var(--color-dark); padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
+        .contact-info a.email-link:hover { color: var(--color-accent); border-color: var(--color-accent); }
         
         .contact-form { 
-            display: flex; flex-direction: column; gap: var(--space-md); 
-            background: transparent; padding: 0; border: none; box-shadow: none;
-            margin-top: 1rem;
+            display: flex; flex-direction: column; gap: 2rem; 
+            background: var(--color-stone); padding: var(--space-lg); border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.02);
         }
         .input-group { position: relative; display: flex; flex-direction: column; }
-        .input-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; color: #666; margin-bottom: 0.5rem; }
-        .premium-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0.5rem 0; font-family: var(--font-sans); font-size: 1rem; color: var(--color-dark); transition: border-color 0.3s ease; border-radius: 0; }
-        .premium-input:focus { outline: none; border-bottom-color: var(--color-dark); }
+        .input-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: #666; margin-bottom: 0.5rem; }
+        
+        /* Rimosso pattern AI, inserito stile minimale elegante */
+        .premium-input { 
+            width: 100%; background: transparent; border: none; 
+            border-bottom: 1px solid rgba(0,0,0,0.2); padding: 0.5rem 0; 
+            font-family: var(--font-sans); font-size: 1rem; color: var(--color-dark); 
+            transition: border-color 0.3s ease; 
+        }
+        .premium-input:focus { outline: none; border-bottom-color: var(--color-accent); }
         
         /* ANIMATION REVEALS GLOBALI */
         .js-reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
         .js-reveal.is-revealed { opacity: 1; transform: translateY(0); }
 
         /* ==========================================================================
-           8. MODALS (Privacy & Cookie)
+           8. MODALS E FOOTER
            ========================================================================== */
         .legal-modal {
-            position: fixed; inset: 0; background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            position: fixed; inset: 0; background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             z-index: 10000; display: flex; justify-content: center; align-items: center;
             opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
             padding: var(--space-md);
@@ -402,20 +416,34 @@
         .legal-modal.active { opacity: 1; pointer-events: auto; }
         .modal-content {
             background: var(--color-stone); color: var(--color-dark);
-            width: 100%; max-width: 600px; max-height: 85vh; overflow-y: auto;
+            border-radius: 8px; width: 100%; max-width: 700px; max-height: 85vh; overflow-y: auto;
             padding: var(--space-lg); position: relative;
             transform: translateY(20px); transition: transform 0.4s var(--ease-out-expo);
         }
         .legal-modal.active .modal-content { transform: translateY(0); }
         .modal-close {
             position: absolute; top: var(--space-sm); right: var(--space-sm);
-            background: none; border: none; font-size: 2rem; line-height: 1;
-            color: var(--color-dark); cursor: pointer; padding: 5px 10px; font-weight: 300;
+            background: none; border: none; font-size: 2.5rem; line-height: 1;
+            color: var(--color-dark); cursor: pointer; padding: 10px; font-weight: 300; transition: color 0.3s;
         }
+        .modal-close:hover { color: var(--color-accent); }
         .modal-content h3 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 400; }
-        .modal-content h4 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem 0; }
-        .modal-content p, .modal-content ul { font-size: 0.9rem; line-height: 1.6; color: #555; margin-bottom: 1rem; font-weight: 300; }
+        .modal-content h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 700; margin: 2rem 0 0.5rem 0; color: var(--color-dark); }
+        .modal-content p, .modal-content ul { font-size: 0.95rem; line-height: 1.6; color: #444; margin-bottom: 1rem; font-weight: 400; }
         .modal-content ul { padding-left: 1.5rem; }
+
+        .site-footer {
+            background: var(--color-dark); color: var(--color-white); 
+            padding: var(--space-lg) 0 var(--space-md) 0; border-top: 1px solid var(--color-border-dark);
+        }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); margin-bottom: var(--space-lg); }
+        @media (min-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        
+        .footer-bottom { 
+            display: flex; flex-direction: column; gap: 1rem; border-top: 1px solid var(--color-border-dark); 
+            padding-top: var(--space-md); text-align: center; 
+        }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
     </style>
 </head>
 <body>
@@ -424,40 +452,16 @@
     
     <header class="site-header js-header">
         <div class="container header-inner">
-           <a href="#" class="logo brand-logo" aria-label="Novus Ateliers Home" style="display: flex; align-items: center;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" width="60" height="48" class="novus-svg">
-        <defs>
-          <style>
-            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
-            .monogram-n { 
-                font-family: 'Playfair Display', serif; 
-                font-size: 48px; 
-                fill: currentColor; 
-                font-weight: 600; 
-            }
-            .monogram-a { 
-                font-family: 'Playfair Display', serif; 
-                font-size: 54px; 
-                fill: var(--color-accent, #B29054); /* Usa l'oro del tuo brand */
-                font-weight: 400; 
-                font-style: italic; 
-            }
-          </style>
-        </defs>
-        <g transform="translate(5, 55)">
-          <!-- Iniziale N in grassetto e colore primario -->
-          <text x="0" y="0" class="monogram-n">N</text>
-          <!-- Iniziale A in corsivo, leggermente ingrandita e sovrapposta -->
-          <text x="34" y="0" class="monogram-a">A</text>
-        </g>
-    </svg>
-</a>
+           <a href="#" aria-label="Novus Ateliers Home" class="brand-logo">
+                <span class="logo-mark">N</span>
+                <span class="logo-text">Novus Ateliers</span>
+            </a>
             
             <nav class="nav-links">
-                <a href="#metodo">Il Metodo</a>
-                <a href="#casi-studio">Casi Studio</a>
-                <a href="#contatti">Contatti</a>
-                <a href="#contatti" class="btn-premium" style="margin-left: 1.5rem;"><span>Avvia Progetto</span></a>
+                <a href="#processo">Il Processo</a>
+                <a href="#casi-studio">Portfolio</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contatti" class="btn-premium"><span>Inizia un Progetto</span></a>
             </nav>
 
             <button class="menu-toggle js-menu-toggle" aria-label="Menu">
@@ -468,9 +472,10 @@
     </header>
 
     <nav class="mobile-nav js-mobile-nav">
-        <a href="#metodo" class="js-mobile-link">Il Metodo</a>
-        <a href="#casi-studio" class="js-mobile-link">Casi Studio</a>
-        <a href="#contatti" class="js-mobile-link">Contatti</a>
+        <a href="#processo" class="js-mobile-link">Il Processo</a>
+        <a href="#casi-studio" class="js-mobile-link">Portfolio</a>
+        <a href="#faq" class="js-mobile-link">FAQ</a>
+        <a href="#contatti" class="js-mobile-link" style="color: var(--color-accent);">Contatti</a>
     </nav>
 
     <main>
@@ -479,7 +484,7 @@
                 <div class="hero-title js-hero-anim">
                     <span class="line"><span>Ingegneria</span></span>
                     <span class="line"><span>del <span class="italic-accent">Valore.</span></span></span>
-                    <p class="hero-subtitle">Non creiamo semplici siti web. Sviluppiamo asset digitali proprietari ad alte prestazioni per brand che esigono l'eccellenza.</p>
+                    <p class="hero-subtitle">Progettiamo architetture software proprietarie ed ecosistemi B2B per aziende strutturate. Uniamo design elegante e performance assolute per elevare la tua autorevolezza digitale.</p>
                 </div>
                 
                 <div class="hero-visual" aria-hidden="true">
@@ -507,7 +512,7 @@
                             </div>
                         </div>
                         <div class="glass-panel pane-float">
-                            <div style="font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5);">Performance Score</div>
+                            <div style="font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5);">System Performance</div>
                             <div style="font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--color-white); margin-top: 4px;">100<span style="color:var(--color-accent); font-size: 2.5rem;">%</span></div>
                         </div>
                     </div>
@@ -515,89 +520,51 @@
             </div>
         </section>
 
-        <section id="visione" class="features-section dark-mode">
-            <div class="container">
-                <div class="section-header js-reveal">
-                    <h2 class="section-title-modern">Perché l'artigianato<br>digitale vince sempre.</h2>
-                </div>
-                
-                <div class="bento-grid js-reveal">
-                    <div class="bento-card bento-large">
-                        <div class="bento-number">01</div>
-                        <div>
-                            <h3>Performance Assolute</h3>
-                            <p>Senza il peso di plugin inutili o temi precompilati pesanti, i nostri siti caricano istantaneamente. Il codice pulito garantisce punteggi massimi sui motori di ricerca e un'esperienza utente impeccabile su qualsiasi dispositivo.</p>
-                        </div>
-                    </div>
-
-                    <div class="bento-card">
-                        <div class="bento-number">02</div>
-                        <div>
-                            <h3>Design Su Misura</h3>
-                            <p>Nessun limite imposto da una piattaforma. Ogni pixel è disegnato attorno alla narrazione del tuo brand.</p>
-                        </div>
-                    </div>
-
-                    <div class="bento-card">
-                        <div class="bento-number">03</div>
-                        <div>
-                            <h3>Sicurezza Blindata</h3>
-                            <p>Meno codice ridondante significa zero vulnerabilità comuni. Una struttura solida e inattaccabile nel tempo.</p>
-                        </div>
-                    </div>
-
-                    <div class="bento-card">
-                        <div class="bento-number">04</div>
-                        <div>
-                            <h3>Manutenzione nel Tempo</h3>
-                            <p>Consegniamo un codice pulito, commentato e strutturato in modo che chiunque, in futuro, possa espanderlo senza dover decifrare costruttori di pagine proprietari o software obsoleti.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="bento-card">
-                        <div class="bento-number">05</div>
-                        <div>
-                            <h3>Scalabilità Infinita</h3>
-                            <p>L'architettura flessibile permette al tuo ecosistema digitale di crescere senza limiti, supportando picchi di traffico e nuove integrazioni in modo nativo.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-       
-        <section id="metodo" class="section services-section">
+        <section id="processo" class="process-section">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
                     <span class="mask"><span class="text">Il nostro</span></span><br>
                     <span class="mask"><span class="text italic-accent">metodo.</span></span>
                 </h2>
+                <p class="section-subtitle js-reveal">Affianchiamo i nostri clienti con una metodologia rigorosa, garantendo trasparenza in ogni fase per trasformare obiettivi complessi in architetture stabili e performanti.</p>
                 
-                <div class="services-grid js-reveal">
-                    <div class="service-card">
-                        <div class="card-number">01</div>
-                        <h3>Architettura Headless</h3>
-                        <p>Separiamo il frontend dal backend. Il risultato è un system con sicurezza impenetrabile, nessun database esposto e tempi di caricamento istantanei indipendentemente dal traffico.</p>
+                <div class="process-grid js-reveal">
+                    
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <h3>Analisi e Strategia</h3>
+                        <p>Studiamo a fondo il tuo modello di business, i tuoi obiettivi e il posizionamento aziendale. Definiamo insieme l'architettura tecnica necessaria per supportare la tua crescita senza colli di bottiglia.</p>
                     </div>
-                    <div class="service-card">
-                        <div class="card-number">02</div>
-                        <h3>Design Funzionale</h3>
-                        <p>L'estetica è asservita all'obiettivo aziendale. Progettiamo interfacce in cui ogni elemento è posizionato strategicamente per eliminare l'attrito e guidare l'utente verso la conversione.</p>
+
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <h3>UX/UI Design</h3>
+                        <p>Progettiamo interfacce eleganti e funzionali. Ogni dettaglio visivo e ogni interazione vengono studiati per trasmettere solidità istituzionale e guidare l'utente verso la conversione (B2B o B2C).</p>
                     </div>
-                    <div class="service-card">
-                        <div class="card-number">03</div>
-                        <h3>Indipendenza Totale</h3>
-                        <p>Rifiutiamo i vincoli degli abbonamenti e dei template. Consegniamo il codice sorgente nativo: un vero asset tecnologico di proprietà dell'azienda che non si deprezza mai.</p>
+
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <h3>Sviluppo Nativo</h3>
+                        <p>Scriviamo codice pulito, sicuro e proprietario. Niente template pre-confezionati. Costruiamo ecosistemi scalabili, ottimizzati per essere veloci e perfettamente integrabili con i tuoi gestionali (CRM/ERP).</p>
                     </div>
+
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <h3>Lancio e Affiancamento</h3>
+                        <p>Dopo test rigorosi e audit di sicurezza, pubblichiamo il progetto. Forniamo tutta la documentazione, formazione per il tuo team e garantiamo assistenza post-lancio per mantenere il sistema impeccabile.</p>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="casi-studio" class="section cases-section dark-mode">
+        <section id="casi-studio" class="cases-section dark-mode">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
-                    <span class="mask"><span class="text">Casi</span></span><br>
-                    <span class="mask"><span class="text italic-accent">studio.</span></span>
+                    <span class="mask"><span class="text">Progetti</span></span><br>
+                    <span class="mask"><span class="text italic-accent">selezionati.</span></span>
                 </h2>
+                <p class="section-subtitle js-reveal" style="margin-bottom: var(--space-xl);">Esempi concreti di come abbiamo elevato il posizionamento di aziende strutturate attraverso piattaforme digitali di eccellenza.</p>
                 
                 <div class="case-list">
                     
@@ -609,28 +576,13 @@
                         </div>
                         <div class="case-info">
                             <div>
-                                <span class="case-tag">Healthtech & AI — 01</span>
-                                <div class="case-header-meta">
-                                    <h3 class="case-client">MindNeuro</h3>
-                                </div>
-                                <p>Progettazione di un'infrastruttura digitale di altissima fascia per un istituto svizzero di medicina predittiva, arricchita da shader WebGL e animazioni editoriali 3D.</p>
+                                <span class="case-tag">Healthtech & AI</span>
+                                <h3 class="case-client">MindNeuro</h3>
+                                <p class="desc">Progettazione di un'infrastruttura digitale di altissima fascia per un istituto svizzero di medicina predittiva. Un'architettura sicura per posizionare il brand nel settore ultra-luxury medico.</p>
                             </div>
-                            
-                            <div>
-                                <div class="case-data-grid">
-                                    <div class="data-box">
-                                        <h4>Problema</h4>
-                                        <p>Posizionamento brand ultra-luxury mancante.</p>
-                                    </div>
-                                    <div class="data-box">
-                                        <h4>Risultato</h4>
-                                        <p class="highlight">Esperienza web da +15.000€</p>
-                                    </div>
-                                </div>
-                                <a href="https://clinica.novus-ateliers.workers.dev/" class="btn-premium" style="width: max-content;">
-                                    <span>Visita il sito ↗</span>
-                                </a>
-                            </div>
+                            <a href="https://clinica.novus-ateliers.workers.dev/" class="btn-premium" style="width: max-content;">
+                                <span>Esplora il progetto</span>
+                            </a>
                         </div>
                     </div>
 
@@ -642,28 +594,13 @@
                         </div>
                         <div class="case-info">
                             <div>
-                                <span class="case-tag">Interior Design — 02</span>
-                                <div class="case-header-meta">
-                                    <h3 class="case-client">Aura Studio</h3>
-                                </div>
-                                <p>Realizzazione di una vetrina digitale premium per uno studio di interior design, focalizzata sull'eleganza visiva e sulla fluidità della navigazione per esaltare i progetti architettonici.</p>
+                                <span class="case-tag">Architettura e Real Estate</span>
+                                <h3 class="case-client">Aura Studio</h3>
+                                <p class="desc">Ingegnerizzazione di un hub digitale B2B per uno studio di interior design, focalizzato sulla fluidità visiva e un caricamento istantaneo del vasto portfolio progetti.</p>
                             </div>
-                            
-                            <div>
-                                <div class="case-data-grid">
-                                    <div class="data-box">
-                                        <h4>Problema</h4>
-                                        <p>Presentazione frammentata del portfolio.</p>
-                                    </div>
-                                    <div class="data-box">
-                                        <h4>Risultato</h4>
-                                        <p class="highlight">Esperienza visiva immersiva</p>
-                                    </div>
-                                </div>
-                                <a href="https://aura.novus-ateliers.workers.dev/" class="btn-premium" style="width: max-content;">
-                                    <span>Visita il sito ↗</span>
-                                </a>
-                            </div>
+                            <a href="https://aura.novus-ateliers.workers.dev/" class="btn-premium" style="width: max-content;">
+                                <span>Esplora il progetto</span>
+                            </a>
                         </div>
                     </div>
 
@@ -675,28 +612,13 @@
                         </div>
                         <div class="case-info">
                             <div>
-                                <span class="case-tag">Food & Beverage — 03</span>
-                                <div class="case-header-meta">
-                                    <h3 class="case-client">Amana Pizzeria</h3>
-                                </div>
-                                <p>Progettazione e sviluppo di una piattaforma web moderna ed elegante per valorizzare l'identità del brand e ottimizzare l'esperienza utente.</p>
+                                <span class="case-tag">Food & Beverage Espanso</span>
+                                <h3 class="case-client">Amana</h3>
+                                <p class="desc">Sviluppo di una piattaforma web scalabile ad alta conversione per un brand in forte espansione, ottimizzata per azzerare i tassi di abbandono (bounce rate).</p>
                             </div>
-                            
-                            <div>
-                                <div class="case-data-grid">
-                                    <div class="data-box">
-                                        <h4>Problema</h4>
-                                        <p>Presenza online debole e navigazione datata.</p>
-                                    </div>
-                                    <div class="data-box">
-                                        <h4>Risultato</h4>
-                                        <p class="highlight">Migliore UX e velocità ottimizzata</p>
-                                    </div>
-                                </div>
-                                <a href="https://pizzeria.novus-ateliers.workers.dev/" class="btn-premium" style="width: max-content;">
-                                    <span>Visita il sito ↗</span>
-                                </a>
-                            </div>
+                            <a href="https://pizzeria.novus-ateliers.workers.dev/" class="btn-premium" style="width: max-content;">
+                                <span>Esplora il progetto</span>
+                            </a>
                         </div>
                     </div>
 
@@ -704,23 +626,69 @@
             </div>
         </section>
 
-        <section id="contatti" class="section contact-section">
+        <section id="faq" class="faq-section">
+            <div class="container faq-container js-reveal">
+                <h2 style="text-align: center; margin-bottom: var(--space-xl);">Domande <span class="italic-accent">Frequenti.</span></h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Qual è la differenza tra un classico sito web e le vostre piattaforme?
+                        <span class="faq-icon"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>I classici siti "vetrina" utilizzano spesso template pre-fatti (come WordPress base) che nel tempo diventano lenti, vulnerabili e difficili da personalizzare. Noi sviluppiamo "ecosistemi su misura": scriviamo il codice da zero per garantire velocità estrema, sicurezza bancaria e la possibilità di integrare il sito con i vostri software aziendali interni.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Lavorate solo con startup tecnologiche o anche in settori tradizionali?
+                        <span class="faq-icon"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Lavoriamo ampiamente con settori tradizionali (manifatturiero, immobiliare, sanità, food & beverage). Anzi, è proprio in questi settori che un'architettura digitale di altissima fascia permette di distaccarsi nettamente dalla concorrenza, digitalizzando i processi e proiettando un'immagine di assoluta leadership.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Quanto tempo richiede lo sviluppo di un progetto completo?
+                        <span class="faq-icon"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dipende dalla complessità dei requisiti e dalle integrazioni necessarie. Generalmente, per un ecosistema aziendale B2B strutturato, il ciclo di vita (dall'analisi strategica al rilascio online) varia dalle 6 alle 12 settimane. Forniamo sempre un cronoprogramma preciso in fase preventiva.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Cosa succede dopo il lancio? Siete disponibili per la manutenzione?
+                        <span class="faq-icon"></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Assolutamente sì. Il giorno del lancio è solo l'inizio. Offriamo piani di affiancamento continuativo per gestire aggiornamenti di sicurezza, monitoraggio delle performance ed espansioni future. Inoltre, l'azienda manterrà sempre la piena proprietà intellettuale (code ownership) del software sviluppato.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="contatti" class="contact-section">
             <div class="container contact-grid">
                 
                 <div class="contact-info js-reveal">
                     <h2 class="js-wow-reveal wow-title" style="margin-bottom: var(--space-md);">
-                        <span class="mask"><span class="text">Inizia una</span></span><br>
-                        <span class="mask"><span class="text italic-accent">discussione.</span></span>
+                        <span class="mask"><span class="text">Parliamo del tuo</span></span><br>
+                        <span class="mask"><span class="text italic-accent">progetto.</span></span>
                     </h2>
-                    <p style="margin-bottom: 2.5rem; color: #444; max-width: 400px; font-weight: 300; font-size: 1.1rem;">Nessun intermediario, nessun commerciale. Parlerai direttamente con l'architetto del software per analizzare la fattibilità del tuo progetto.</p>
+                    <p>Siamo a disposizione per ascoltare le tue esigenze e capire insieme come la tecnologia può accelerare la crescita della tua azienda. Compila il form per fissare una consulenza iniziale gratuita.</p>
                     
-                    <a href="mailto:novus.ateliers@gmail.com" class="contact-email">novus.ateliers@gmail.com</a>
+                    <a href="mailto:novus.ateliers@gmail.com" class="email-link">novus.ateliers@gmail.com</a>
                 </div>
                 
                 <div class="js-reveal">
-                    <!-- Form aggiornato con campi nascosti per FormSubmit -->
                     <form class="contact-form js-form" action="#" method="POST">
-                        <input type="hidden" name="_subject" value="Nuova richiesta dal sito Novus Ateliers">
+                        <input type="hidden" name="_subject" value="Nuova richiesta di consulenza da Novus Ateliers">
                         <input type="hidden" name="_captcha" value="false">
                         
                         <div class="input-group">
@@ -729,20 +697,20 @@
                         </div>
                         
                         <div class="input-group">
-                            <label for="email" class="input-label">Email Professionale *</label>
+                            <label for="email" class="input-label">Email lavorativa *</label>
                             <input type="email" id="email" name="email" class="premium-input" required>
                         </div>
                         
                         <div class="input-group">
-                            <label for="details" class="input-label">Dettagli del Progetto *</label>
-                            <textarea id="details" name="details" rows="3" class="premium-input" style="resize: vertical;" required></textarea>
+                            <label for="details" class="input-label">Di cosa hai bisogno? *</label>
+                            <textarea id="details" name="details" rows="3" class="premium-input" style="resize: vertical;" required placeholder="Descrivi brevemente i tuoi obiettivi..."></textarea>
                         </div>
                         
-                        <p style="font-size: 0.75rem; color: #777; margin-top: 0.5rem; font-weight: 300;">
-                            Inviando questo modulo dichiari di aver letto e compreso la nostra <button type="button" class="js-open-modal" data-target="privacy-modal" style="background:none; border:none; color:var(--color-dark); text-decoration:underline; font-family:inherit; font-size:inherit; padding:0; cursor: pointer;">Privacy Policy</button>.
+                        <p style="font-size: 0.8rem; color: #777; margin-top: 0.5rem;">
+                            Inviando il messaggio accetti la nostra <button type="button" class="js-open-modal" data-target="privacy-modal" style="background:none; border:none; color:var(--color-dark); text-decoration:underline; font-family:inherit; font-size:inherit; padding:0; cursor: pointer;">Privacy Policy</button>.
                         </p>
 
-                        <button type="submit" class="btn-premium btn-submit" style="margin-top: 1.5rem; width: 100%;">
+                        <button type="submit" class="btn-premium btn-submit" style="margin-top: 1rem; width: 100%;">
                             <span>Invia Richiesta</span>
                         </button>
                     </form>
@@ -752,7 +720,6 @@
         </section>
     </main>
 
-    <!-- Modals Legali -->
     <div id="privacy-modal" class="legal-modal">
         <div class="modal-content">
             <button class="modal-close js-close-modal">&times;</button>
@@ -762,15 +729,14 @@
             <h4>1. Titolare del Trattamento</h4>
             <p>Novus Ateliers.<br>Email: novus.ateliers@gmail.com<br></p>
             
-            <h4>2. Tipologia di dati trattati e finalità</h4>
-            <p><strong>Dati forniti volontariamente dall'utente:</strong> L'invio facoltativo, esplicito e volontario di messaggi tramite il modulo di contatto o agli indirizzi indicati su questo sito comporta la successiva acquisizione dell'indirizzo del mittente, necessario per rispondere alle richieste, nonché degli eventuali altri dati personali inseriti nella missiva (es. Nome, Azienda, Dettagli del Progetto).</p>
-            <p>Questi dati vengono utilizzati al solo fine di eseguire il servizio o la prestazione richiesta e non saranno ceduti a terzi per scopi commerciali.</p>
+            <h4>2. Tipologia di dati e finalità</h4>
+            <p>L'invio facoltativo e volontario di messaggi tramite il modulo comporta l'acquisizione dell'indirizzo del mittente, necessario per rispondere, nonché degli eventuali altri dati inseriti. I dati sono usati al solo fine di eseguire la prestazione o consulenza richiesta in ambito B2B.</p>
             
-            <h4>3. Modalità del trattamento e conservazione</h4>
-            <p>I dati personali sono trattati con strumenti automatizzati per il tempo strettamente necessario a conseguire gli scopi per cui sono stati raccolti. Specifiche misure di sicurezza sono osservate per prevenire la perdita dei dati, usi illeciti o non corretti ed accessi non autorizzati.</p>
+            <h4>3. Conservazione</h4>
+            <p>I dati personali sono trattati con strumenti automatizzati per il tempo strettamente necessario a conseguire gli scopi per cui sono stati raccolti. Specifiche misure di sicurezza sono osservate per prevenire la perdita dei dati o accessi non autorizzati.</p>
             
             <h4>4. Diritti degli interessati</h4>
-            <p>I soggetti cui si riferiscono i dati personali hanno il diritto in qualunque momento di ottenere la conferma dell'esistenza o meno dei medesimi dati e di conoscerne il contenuto e l'origine, verificarne l'esattezza o chiederne l'integrazione o l'aggiornamento, oppure la rettificazione (art. 7 del Codice in materia di protezione dei dati personali e artt. 15-22 del GDPR). Le richieste vanno rivolte al Titolare del trattamento.</p>
+            <p>Gli utenti hanno il diritto di ottenere la conferma dell'esistenza dei dati, conoscerne il contenuto, verificarne l'esattezza o chiederne l'aggiornamento, la rettifica o la cancellazione. Le richieste vanno rivolte al Titolare.</p>
         </div>
     </div>
 
@@ -778,30 +744,43 @@
         <div class="modal-content">
             <button class="modal-close js-close-modal">&times;</button>
             <h3>Cookie Policy</h3>
-            <p>Questo sito web non utilizza cookie di profilazione o tracciamento.</p>
+            <p>In linea con la nostra filosofia di rispetto per l'utente, questo sito web è progettato per non utilizzare cookie invasivi.</p>
             
-            <h4>Cosa sono i cookie?</h4>
-            <p>I cookie sono stringhe di testo di piccole dimensioni che i siti visitati dall'utente inviano al suo terminale, dove vengono memorizzati per essere poi ritrasmessi agli stessi siti alla successiva visita del medesimo utente.</p>
-            
-            <h4>Quali cookie utilizziamo?</h4>
-            <p>Attualmente, questo sito è una struttura statica e <strong>non rilascia alcun cookie analytics di terze parti (es. Google Analytics) né cookie di profilazione per fini pubblicitari</strong>.</p>
-            <p>Potremmo utilizzare esclusivamente <strong>cookie tecnici e/o archiviazione locale (Local Storage)</strong> strettamente necessari per il corretto funzionamento dell'interfaccia utente (ad esempio, per ricordare l'eventuale chiusura di popup o preferenze di visualizzazione della pagina).</p>
-            <p>Poiché non vi è attività di profilazione o tracciamento attivo, per l'utilizzo di questo sito non è richiesto il preventivo consenso dell'utente all'installazione dei cookie, come previsto dalla normativa vigente.</p>
-            
-            <h4>Gestione dei Cookie nel Browser</h4>
-            <p>In ogni caso, l'utente può decidere se accettare o meno i cookie (o cancellare la memoria locale) utilizzando le impostazioni del proprio browser.</p>
+            <h4>Utilizzo dei Cookie</h4>
+            <p>Attualmente, questa infrastruttura statica <strong>non rilascia cookie analytics di terze parti (es. Google Analytics) né cookie di profilazione</strong> per scopi pubblicitari.</p>
+            <p>Potremmo utilizzare esclusivamente <strong>cookie tecnici e/o Local Storage</strong> strettamente necessari per il funzionamento essenziale dell'interfaccia utente (come ricordare se hai chiuso un banner).</p>
+            <p>Poiché non vi è attività di profilazione, per l'utilizzo di questo sito non è richiesto il preventivo consenso dell'utente, come previsto dalla normativa vigente.</p>
         </div>
     </div>
 
-    <!-- Footer Aggiornato -->
-    <footer style="background: var(--color-dark); color: white; padding: var(--space-lg) 0 var(--space-md) 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p style="font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.5rem;">&copy; 2026 Novus Ateliers. Architecture for the web.</p>
-        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-bottom: 2rem; font-family: var(--font-sans);">
-            Novus Ateliers 
-        </p>
-        <div style="display: flex; justify-content: center; gap: 2rem; font-size: 0.7rem; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.05em;">
-            <button class="js-open-modal" data-target="privacy-modal" style="background:none; border:none; color: rgba(255,255,255,0.4); font-size:inherit; font-family:inherit; text-decoration: none; transition: color 0.3s; cursor: pointer; letter-spacing: inherit;" onmouseover="this.style.color='var(--color-white)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Privacy Policy</button>
-            <button class="js-open-modal" data-target="cookie-modal" style="background:none; border:none; color: rgba(255,255,255,0.4); font-size:inherit; font-family:inherit; text-decoration: none; transition: color 0.3s; cursor: pointer; letter-spacing: inherit;" onmouseover="this.style.color='var(--color-white)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Cookie Policy</button>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; color: var(--color-white);">
+                        <span style="font-family: var(--font-serif); font-size: 1.8rem; font-style: italic; color: var(--color-accent); line-height: 1;">N</span>
+                        <span style="font-family: var(--font-sans); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;">Novus Ateliers</span>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem; max-width: 320px; line-height: 1.6;">Progettiamo e sviluppiamo architetture web di altissimo livello per le aziende di domani.</p>
+                </div>
+                <div style="display: flex; gap: 4rem;">
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent);">Esplora</span>
+                        <a href="#processo" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Metodo</a>
+                        <a href="#casi-studio" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Portfolio</a>
+                        <a href="#faq" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">FAQ</a>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent);">Legal</span>
+                        <button class="js-open-modal" data-target="privacy-modal" style="background:none; border:none; color: rgba(255,255,255,0.7); font-size:0.95rem; font-family:inherit; text-align:left; padding:0; cursor: pointer; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Privacy Policy</button>
+                        <button class="js-open-modal" data-target="cookie-modal" style="background:none; border:none; color: rgba(255,255,255,0.7); font-size:0.95rem; font-family:inherit; text-align:left; padding:0; cursor: pointer; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Cookie Policy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="font-size: 0.8rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">&copy; 2026 NOVUS ATELIERS. TUTTI I DIRITTI RISERVATI.</p>
+                <p style="font-size: 0.8rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">OPERATING FROM ITALY / WORLDWIDE.</p>
+            </div>
         </div>
     </footer>
 
@@ -867,19 +846,19 @@
             
             setTimeout(() => {
                 heroLines.forEach((span, index) => {
-                    span.style.transition = `transform 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s, opacity 1s ease ${index * 0.1}s`;
+                    span.style.transition = `transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s, opacity 1s ease ${index * 0.15}s`;
                     span.style.transform = 'translateY(0)';
                     span.style.opacity = '1';
                 });
                 if(heroSub) {
-                    heroSub.style.transition = `transform 1s ease 0.4s, opacity 1s ease 0.4s`;
+                    heroSub.style.transition = `transform 1.2s ease 0.5s, opacity 1.2s ease 0.5s`;
                     heroSub.style.transform = 'translateY(0)';
                     heroSub.style.opacity = '1';
                 }
             }, 100);
 
             /* --- 3. Scroll Reveal --- */
-            const reveals = document.querySelectorAll('.js-reveal, .js-wow-reveal');
+            const reveals = document.querySelectorAll('.js-reveal, .js-wow-reveal, .process-grid');
             const scrollObserver = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -887,7 +866,7 @@
                         obs.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             
             reveals.forEach(el => scrollObserver.observe(el));
 
@@ -900,7 +879,7 @@
                 
                 sections.forEach(sec => {
                     const rect = sec.getBoundingClientRect();
-                    if (rect.top <= 60 && rect.bottom >= 60) {
+                    if (rect.top <= 90 && rect.bottom >= 90) {
                         isDarkModeSection = sec.classList.contains('dark-mode');
                     }
                 });
@@ -912,13 +891,35 @@
                 }
 
                 if(window.scrollY > 50) {
-                    header.style.padding = '8px 0'; /* Altezza abbassata in fase di scroll */
+                    header.classList.add('scrolled');
                 } else {
-                    header.style.padding = 'calc(var(--space-sm) * 0.5) 0'; /* Altezza iniziale abbassata */
+                    header.classList.remove('scrolled');
                 }
             }, { passive: true });
 
-            /* --- 5. Validazione e Invio Form tramite FormSubmit --- */
+            /* --- 5. Accordion FAQ --- */
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const faqItem = btn.parentElement;
+                    const answer = faqItem.querySelector('.faq-answer');
+                    const isActive = faqItem.classList.contains('active');
+
+                    // Chiudi tutte
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    // Se non era attiva, aprila
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + 40 + "px"; // 40px padding aggiuntivo
+                    }
+                });
+            });
+
+            /* --- 6. Validazione e Invio Form tramite FormSubmit --- */
             const contactForm = document.querySelector('.js-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', (e) => {
@@ -937,14 +938,14 @@
                     .then(response => response.json())
                     .then(data => {
                         contactForm.parentElement.innerHTML = `
-                            <div style="padding: var(--space-md) 0; border-top: 1px solid rgba(0,0,0,0.1);">
-                                <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Ricevuto.</h3>
-                                <p style="color: #444; font-size: 1rem; font-weight: 300;">La tua richiesta è nel nostro sistema. Sarai ricontattato entro 24 ore dal nostro team.</p>
+                            <div style="padding: var(--space-lg); background: var(--color-stone); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                                <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Richiesta inviata.</h3>
+                                <p style="color: #444; font-size: 1rem; font-weight: 400;">Grazie per averci contattato. Abbiamo ricevuto i tuoi dati e un nostro responsabile si metterà in contatto con te entro 24 ore.</p>
                             </div>
                         `;
                     })
                     .catch(error => {
-                        submitBtn.textContent = "Errore. Riprova.";
+                        submitBtn.textContent = "Errore di invio. Riprova.";
                         contactForm.querySelector('button').disabled = false;
                     });
                 });
