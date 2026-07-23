@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Novus Ateliers | Enterprise Digital Architecture</title>
+    <title>Novus Ateliers | Sviluppo Web Sartoriale & Architetture Digitali ad Alte Prestazioni</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
 
     <style>
         /* ==========================================================================
-           1. CORE SYSTEM & TOKENS ENTERPRISE
+           1. CORE SYSTEM & TOKENS BOUTIQUE PREMIUM
            ========================================================================== */
         :root {
             --color-white: #FFFFFF;
@@ -60,6 +60,7 @@
         .dark-mode .noise-overlay { mix-blend-mode: overlay; opacity: 0.04; }
 
         a, button { outline: none; cursor: pointer; text-decoration: none; color: inherit; }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
         
         .container { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 var(--space-md); position: relative; }
         
@@ -90,7 +91,7 @@
         .js-wow-reveal.is-revealed .mask:nth-child(2) .text { transition-delay: 0.05s; }
         .js-wow-reveal.is-revealed .mask:nth-child(3) .text { transition-delay: 0.1s; }
 
-        /* BUTTONS - Stile Corporate Premium */
+        /* BUTTONS - Stile Atelier Premium */
         .btn-premium { 
             display: inline-flex; align-items: center; justify-content: center;
             padding: 0 2rem; height: 52px;
@@ -105,7 +106,6 @@
             border-color: var(--color-accent);
             color: var(--color-white);
             transform: translateY(-2px);
-            /* Rimossa l'ombra AI, mantenuto solo il cambio colore e leggero lift */
         }
         .dark-mode .btn-premium { background: var(--color-white); color: var(--color-dark); border-color: var(--color-white); }
         .dark-mode .btn-premium:hover { background: var(--color-accent); color: var(--color-white); border-color: var(--color-accent); }
@@ -165,7 +165,7 @@
         .nav-links a:not(.btn-premium):hover::after { width: 100%; }
         .nav-links .btn-premium { height: 44px; padding: 0 1.5rem; }
 
-        /* MENU MOBILE DROPDOWN (In alto a destra, non tutto schermo) */
+        /* MENU MOBILE DROPDOWN (In alto a destra) */
         .mobile-nav {
             position: fixed; top: 75px; right: var(--space-md);
             width: calc(100vw - (var(--space-md) * 2)); max-width: 300px;
@@ -208,7 +208,7 @@
         }
 
         /* ==========================================================================
-           3. HERO (Elemento 3D Intatto)
+           3. HERO (Elemento 3D Tecnico / Terminale)
            ========================================================================== */
         .hero { 
             min-height: 100vh; display: flex; align-items: center; 
@@ -221,30 +221,30 @@
         }
         @media (min-width: 1024px) { 
             .hero-layout { flex-direction: row; align-items: center; justify-content: space-between; } 
-            .hero-title { width: 60%; }
-            .hero-visual { width: 40%; }
+            .hero-title { width: 58%; }
+            .hero-visual { width: 42%; }
         }
 
         .hero-title { display: flex; flex-direction: column; }
         .hero-title .line { overflow: hidden; display: block; }
         .hero-title .line span { 
-            display: block; font-size: clamp(3.5rem, 8vw, 9rem); line-height: 0.9;
+            display: block; font-size: clamp(3.2rem, 7vw, 8rem); line-height: 0.95;
             font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.03em;
             transform: translateY(110%); opacity: 0;
         }
-        .hero-title .line:nth-child(2) span { font-family: var(--font-sans); font-weight: 300; font-size: clamp(2.5rem, 6vw, 7.5rem); letter-spacing: -0.04em; }
+        .hero-title .line:nth-child(2) span { font-family: var(--font-sans); font-weight: 300; font-size: clamp(2.2rem, 5.5vw, 6.5rem); letter-spacing: -0.04em; }
         
         .hero-subtitle { 
             margin-top: var(--space-md); font-size: clamp(1rem, 1vw, 1.25rem); 
-            color: rgba(255,255,255,0.7); max-width: 500px; font-weight: 300; line-height: 1.6;
+            color: rgba(255,255,255,0.7); max-width: 520px; font-weight: 300; line-height: 1.6;
             opacity: 0; transform: translateY(20px);
         }
 
-        /* 3D Abstract Glassmorphism UI - INTATTO */
+        /* 3D Glassmorphism Terminal UI */
         .hero-visual { 
-            position: relative; height: 350px; width: 100%; perspective: 1200px; 
+            position: relative; height: 360px; width: 100%; perspective: 1200px; 
             display: flex; justify-content: center; align-items: center;
-            transform: scale(0.75); transform-origin: center top; margin-top: 1rem;
+            transform: scale(0.85); transform-origin: center top; margin-top: 1rem;
         }
         @media (min-width: 1024px) { .hero-visual { height: 50vh; transform: scale(1); margin-top: 0; } }
 
@@ -255,21 +255,101 @@
         .orb-2 { width: 400px; height: 400px; background: #2a2d36; bottom: 10%; right: 10%; animation-direction: reverse; }
 
         .glass-panel {
-            position: absolute; border-radius: 4px; background: rgba(255, 255, 255, 0.02);
+            position: absolute; border-radius: 6px; background: rgba(12, 12, 12, 0.65);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; gap: 12px; padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-        .pane-main { width: 340px; height: 420px; top: 50%; left: 50%; transform: translate(-50%, -50%) rotateY(-15deg) rotateX(10deg) translateZ(40px); }
-        .pane-float { width: 220px; height: 140px; top: 25%; right: -5%; transform: rotateY(-10deg) rotateX(20deg) translateZ(100px); background: rgba(178, 144, 84, 0.05); border-color: rgba(178, 144, 84, 0.2); }
-        .mock-line { height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; width: 100%; margin-bottom: 8px; }
-        .mock-line.short { width: 60%; }
-        .mock-line.accent { background: var(--color-accent); width: 40%; opacity: 0.8;}
+        .pane-main { 
+            width: 350px; height: 400px; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%) rotateY(-12deg) rotateX(8deg) translateZ(40px); 
+            padding: 20px; font-family: monospace; font-size: 0.78rem; color: rgba(255,255,255,0.85);
+        }
+        .pane-float { 
+            width: 220px; height: 130px; top: 22%; right: -2%; 
+            transform: rotateY(-8deg) rotateX(16deg) translateZ(100px); 
+            background: rgba(178, 144, 84, 0.08); border-color: rgba(178, 144, 84, 0.3);
+            padding: 18px; font-family: monospace;
+        }
+
+        /* Dettagli Editor di Codice Tecnico */
+        .terminal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; margin-bottom: 14px;
+        }
+        .terminal-dots { display: flex; gap: 6px; }
+        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27c93f; }
+        .terminal-file { font-size: 0.65rem; color: rgba(255,255,255,0.4); font-family: var(--font-sans); letter-spacing: 0.05em; }
+        
+        .code-block { display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }
+        .code-keyword { color: #e5c07b; }
+        .code-fn { color: #61afef; }
+        .code-string { color: var(--color-accent); }
+        .code-comment { color: rgba(255,255,255,0.35); font-style: italic; }
+        
+        .code-status-box {
+            margin-top: auto; padding: 10px 12px; background: rgba(0,0,0,0.4);
+            border-radius: 4px; border-left: 2px solid var(--color-accent); font-size: 0.72rem;
+        }
         
         @keyframes floatUI { 0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); } 50% { transform: translateY(-15px) rotateX(2deg) rotateY(-2deg); } }
         @keyframes orbit { 100% { transform: rotate(360deg); } }
 
         /* ==========================================================================
-           4. PROCESSO OPERATIVO (Niente "Card AI" - Layout Editoriale)
+           4. TECH STACK (Integrazione Minimalista)
+           ========================================================================== */
+        .tech-stack-section {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-border-dark);
+            border-bottom: 1px solid var(--color-border-dark);
+        }
+        .tech-stack-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        @media (min-width: 900px) {
+            .tech-stack-container {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        .tech-stack-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-accent);
+            white-space: nowrap;
+        }
+        .tech-stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            align-items: center;
+        }
+        .tech-item {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.85);
+            text-transform: uppercase;
+        }
+        .tech-divider {
+            color: var(--color-accent);
+            opacity: 0.4;
+            font-size: 0.8rem;
+        }
+
+        /* ==========================================================================
+           5. PROCESSO OPERATIVO (Metodo Sartoriale)
            ========================================================================== */
         .process-section { padding: var(--space-section) 0; background: var(--color-stone); overflow: hidden; }
         
@@ -291,7 +371,7 @@
         }
 
         .process-step {
-            min-width: 80vw; /* Mostra parzialmente la successiva su mobile */
+            min-width: 80vw;
             scroll-snap-align: start; position: relative;
             background: transparent; padding: 0 2rem 0 0; 
             border-left: 1px solid var(--color-border-light); padding-left: 1.5rem;
@@ -316,7 +396,7 @@
         .process-step p { font-size: 0.95rem; color: #555; line-height: 1.6; }
 
         /* ==========================================================================
-           5. CASI STUDIO - Overlapping Autentico (Senza box-shadow)
+           6. CASI STUDIO - INTATTO
            ========================================================================== */
         .cases-section { background: var(--color-dark); color: var(--color-white); padding: var(--space-section) 0; }
         
@@ -330,10 +410,10 @@
         .case-visual:hover img { transform: scale(1.03); opacity: 1; }
         
         .case-info {
-            background: var(--color-dark); /* Stesso colore della sezione, nessuna card estranea */
+            background: var(--color-dark);
             padding: var(--space-md);
-            border: 1px solid var(--color-border-dark); /* Bordo netto e strutturato */
-            margin-top: -3rem; /* Overlap su mobile */
+            border: 1px solid var(--color-border-dark);
+            margin-top: -3rem;
             position: relative; z-index: 10; width: 90%; margin-left: auto; margin-right: auto;
         }
 
@@ -341,7 +421,7 @@
             .case-block { display: flex; align-items: center; justify-content: space-between; }
             .case-visual-wrapper { width: 65%; margin: 0; }
             .case-info { 
-                width: 45%; margin-top: 0; margin-left: -10%; /* Overlap desktop */
+                width: 45%; margin-top: 0; margin-left: -10%;
                 padding: var(--space-lg); 
             }
             .case-block:nth-child(even) .case-info { margin-left: 0; margin-right: -10%; order: 1; }
@@ -370,7 +450,7 @@
         .case-block.is-revealed .case-info { transition-delay: 0.2s; }
 
         /* ==========================================================================
-           6. FAQ - Layout a Colonne Impressionante
+           7. FAQ
            ========================================================================== */
         .faq-section { background: var(--color-stone); padding: var(--space-section) 0; }
         
@@ -419,7 +499,7 @@
         .faq-answer p { color: #555; font-size: 1.05rem; line-height: 1.7; font-weight: 400; max-width: 90%; }
 
         /* ==========================================================================
-           7. CONTATTI - Form Integrato Senza Card
+           8. CONTATTI - Form Integrato Senza Card
            ========================================================================== */
         .contact-section { 
             background: var(--color-stone); padding: var(--space-section) 0; 
@@ -437,7 +517,6 @@
         .meta-block a { transition: color 0.3s ease; }
         .meta-block a:hover { color: var(--color-accent); }
         
-        /* Nessun box bianco, padding azzerato, vive direttamente sul background stone */
         .contact-form-wrapper {
             background: transparent; padding: 0; border: none; box-shadow: none;
         }
@@ -465,7 +544,7 @@
         }
 
         /* ==========================================================================
-           8. MODALS E FOOTER
+           9. MODALS E FOOTER
            ========================================================================== */
         .legal-modal {
             position: fixed; inset: 0; background: rgba(7, 7, 7, 0.95);
@@ -540,54 +619,83 @@
     </nav>
 
     <main>
+        <!-- HERO SECTION (COPY REVISED TO BOUTIQUE PREMIUM) -->
         <section class="hero dark-mode">
             <div class="container hero-layout">
                 <div class="hero-title js-hero-anim">
-                    <span class="line"><span>Ingegneria</span></span>
-                    <span class="line"><span>del <span class="italic-accent">Valore.</span></span></span>
-                    <p class="hero-subtitle">Progettiamo architetture software proprietarie ed ecosistemi B2B per aziende strutturate. Uniamo design elegante e performance assolute per elevare la tua autorevolezza digitale.</p>
+                    <span class="line"><span>Sviluppo Web</span></span>
+                    <span class="line"><span><span class="italic-accent">Sartoriale.</span></span></span>
+                    <p class="hero-subtitle">Architetture Digitali ad Alte Prestazioni e Design su Misura. Come studio atelier d'eccellenza, realizziamo infrastrutture proprietarie d'élite per chi esige maestria artigianale e prestazioni senza compromessi.</p>
                 </div>
                 
+                <!-- HERO VISUAL: TERMINAL & EDITOR DI CODICE -->
                 <div class="hero-visual" aria-hidden="true">
                     <div class="ui-system">
                         <div class="orb orb-1"></div>
                         <div class="orb orb-2"></div>
+                        
                         <div class="glass-panel pane-main">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                                <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05);"></div>
-                                <div style="display: flex; gap: 8px;">
-                                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--color-accent);"></div>
-                                    <div style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.1);"></div>
+                            <div class="terminal-header">
+                                <div class="terminal-dots">
+                                    <div class="terminal-dot red"></div>
+                                    <div class="terminal-dot yellow"></div>
+                                    <div class="terminal-dot green"></div>
                                 </div>
+                                <span class="terminal-file">atelier.config.ts</span>
                             </div>
-                            <div class="mock-line"></div>
-                            <div class="mock-line short"></div>
-                            <div class="mock-line accent" style="margin-top: auto;"></div>
                             
-                            <div style="background: rgba(0,0,0,0.2); border-radius: 4px; padding: 12px; margin-top: 16px; height: 80px; display:flex; align-items:flex-end;">
-                                <div style="width: 100%; display: flex; align-items: flex-end; gap: 8px; height: 100%;">
-                                    <div style="width: 20%; background: rgba(255,255,255,0.05); height: 40%; border-radius: 2px;"></div>
-                                    <div style="width: 20%; background: rgba(255,255,255,0.1); height: 70%; border-radius: 2px;"></div>
-                                    <div style="width: 20%; background: var(--color-accent); height: 100%; border-radius: 2px;"></div>
-                                </div>
+                            <div class="code-block">
+                                <div><span class="code-keyword">const</span> studio = <span class="code-keyword">new</span> <span class="code-fn">Atelier</span>();</div>
+                                <div style="margin-top: 4px;"><span class="code-comment">// Architettura proprietaria</span></div>
+                                <div>studio.<span class="code-fn">compile</span>({</div>
+                                <div style="padding-left: 14px;">design: <span class="code-string">'custom-tailored'</span>,</div>
+                                <div style="padding-left: 14px;">performance: <span class="code-string">'100%'</span>,</div>
+                                <div style="padding-left: 14px;">speed: <span class="code-string">'ultra-fast'</span></div>
+                                <div>});</div>
+                            </div>
+
+                            <div class="code-status-box">
+                                <div><span style="color: var(--color-accent)">✓</span> System Compiled</div>
+                                <div style="color: rgba(255,255,255,0.4); font-size: 0.65rem; margin-top: 2px;">Edge Latency: 12ms | Status: Ready</div>
                             </div>
                         </div>
+
                         <div class="glass-panel pane-float">
-                            <div style="font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5);">System Performance</div>
+                            <div style="font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5);">Core Speed</div>
                             <div style="font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--color-white); margin-top: 4px;">100<span style="color:var(--color-accent); font-size: 2.5rem;">%</span></div>
+                            <div style="font-size: 0.65rem; color: var(--color-accent); margin-top: 6px;">⚡ Native Codebase</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- TECH STACK SECTION (INTEGRAZIONE) -->
+        <section class="tech-stack-section">
+            <div class="container tech-stack-container js-reveal">
+                <span class="tech-stack-label">Stack Tecnologico</span>
+                <div class="tech-stack-list">
+                    <span class="tech-item">HTML5</span>
+                    <span class="tech-divider">/</span>
+                    <span class="tech-item">CSS Moderno</span>
+                    <span class="tech-divider">/</span>
+                    <span class="tech-item">JavaScript ES6+</span>
+                    <span class="tech-divider">/</span>
+                    <span class="tech-item">Architetture Serverless</span>
+                    <span class="tech-divider">/</span>
+                    <span class="tech-item">Edge Computing</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- METODO SECTION (REVISED TONE: VELOCITÀ, DESIGN PERSONALIZZATO, CODICE PROPRIETARIO) -->
         <section id="processo" class="process-section">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
                     <span class="mask"><span class="text">Il nostro</span></span><br>
                     <span class="mask"><span class="text italic-accent">metodo.</span></span>
                 </h2>
-                <p class="section-subtitle js-reveal">Un percorso rigoroso e trasparente per trasformare la complessità aziendale in un'architettura digitale stabile, sicura e scalabile.</p>
+                <p class="section-subtitle js-reveal">Un percorso sartoriale e trasparente focalizzato su velocità estrema, design personalizzato e codice proprietario per realizzare opere digitali d'eccellenza.</p>
                 
                 <div class="process-grid js-reveal">
                     
@@ -595,38 +703,39 @@
                         <div class="step-header">
                             <span class="step-number">Fase 01</span>
                         </div>
-                        <h3>Analisi e Strategia</h3>
-                        <p>Studiamo il tuo modello di business e i flussi operativi per definire l'architettura tecnica necessaria a supportare la crescita, senza colli di bottiglia.</p>
+                        <h3>Analisi e Visione</h3>
+                        <p>Definiamo l'architettura tecnica e concettuale ideale per il tuo progetto, individuando le scelte estetiche necessarie a valorizzare l'unicità del brand.</p>
                     </div>
 
                     <div class="process-step">
                         <div class="step-header">
                             <span class="step-number">Fase 02</span>
                         </div>
-                        <h3>UX/UI Design</h3>
-                        <p>Progettiamo interfacce dal design chirurgico ed elegante. Ogni dettaglio visivo è calcolato per guidare la conversione B2B e trasmettere pura autorevolezza.</p>
+                        <h3>Design Su Misura</h3>
+                        <p>Progettiamo interfacce uniche, raffinate e personalizzate nei minimi dettagli. Ogni elemento visivo è studiato per offrire un'esperienza d'uso memorabile.</p>
                     </div>
 
                     <div class="process-step">
                         <div class="step-header">
                             <span class="step-number">Fase 03</span>
                         </div>
-                        <h3>Sviluppo Nativo</h3>
-                        <p>Scriviamo codice proprietario, sicuro e ultra-veloce. Ecosistemi progettati su misura per integrarsi perfettamente con i tuoi gestionali CRM ed ERP aziendali.</p>
+                        <h3>Codice Proprietario</h3>
+                        <p>Scriviamo codice nativo, leggero e ultra-veloce senza ricorrere a template pre-fatti, per garantire prestazioni massime e caricamenti istantanei.</p>
                     </div>
 
                     <div class="process-step">
                         <div class="step-header">
                             <span class="step-number">Fase 04</span>
                         </div>
-                        <h3>Lancio e Supporto</h3>
-                        <p>Dopo rigorosi audit di sicurezza, pubblichiamo il sistema offrendo formazione e un affiancamento continuativo per garantirne le performance nel tempo.</p>
+                        <h3>Lancio e Perfezione</h3>
+                        <p>Rifiniamo l'infrastruttura con test rigorosi prima della pubblicazione, offrendo affiancamento dedicato per mantenere la massima resa nel tempo.</p>
                     </div>
 
                 </div>
             </div>
         </section>
 
+        <!-- CASI STUDIO SECTION (RIGOROSAMENTE INTATTO) -->
         <section id="casi-studio" class="cases-section dark-mode">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
@@ -691,12 +800,13 @@
             </div>
         </section>
 
+        <!-- FAQ SECTION -->
         <section id="faq" class="faq-section">
             <div class="container faq-grid js-reveal">
                 
                 <div class="faq-title-sticky">
                     <h2 style="margin-bottom: 1rem;">Domande<br><span class="italic-accent">Frequenti.</span></h2>
-                    <p style="color: #666; font-size: 1.1rem; max-width: 300px;">I dubbi più comuni delle aziende che scelgono di rinnovare la propria infrastruttura digitale.</p>
+                    <p style="color: #666; font-size: 1.1rem; max-width: 300px;">I dubbi più comuni delle aziende e dei brand che scelgono di rinnovare la propria presenza digitale.</p>
                 </div>
                 
                 <div class="faq-accordion">
@@ -744,6 +854,7 @@
             </div>
         </section>
 
+        <!-- CONTATTI SECTION (WITH ARIA-LABELS ADDED) -->
         <section id="contatti" class="contact-section">
             <div class="container contact-grid">
                 
@@ -772,17 +883,17 @@
                         <input type="hidden" name="_captcha" value="false">
                         
                         <div class="input-group">
-                            <input type="text" id="name" name="name" class="premium-input" placeholder=" " required>
+                            <input type="text" id="name" name="name" class="premium-input" placeholder=" " aria-label="Nome e Azienda *" required>
                             <label for="name" class="input-label">Nome e Azienda *</label>
                         </div>
                         
                         <div class="input-group">
-                            <input type="email" id="email" name="email" class="premium-input" placeholder=" " required>
+                            <input type="email" id="email" name="email" class="premium-input" placeholder=" " aria-label="Email lavorativa *" required>
                             <label for="email" class="input-label">Email lavorativa *</label>
                         </div>
                         
                         <div class="input-group">
-                            <textarea id="details" name="details" rows="3" class="premium-input" style="resize: vertical;" placeholder=" " required></textarea>
+                            <textarea id="details" name="details" rows="3" class="premium-input" style="resize: vertical;" placeholder=" " aria-label="Di cosa hai bisogno? *" required></textarea>
                             <label for="details" class="input-label">Di cosa hai bisogno? *</label>
                         </div>
                         
@@ -800,6 +911,7 @@
         </section>
     </main>
 
+    <!-- MODALS -->
     <div id="privacy-modal" class="legal-modal">
         <div class="modal-content">
             <button class="modal-close js-close-modal">&times;</button>
@@ -833,6 +945,7 @@
         </div>
     </div>
 
+    <!-- FOOTER (COLORI A11Y AGGIORNATI) -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
@@ -841,7 +954,7 @@
                         <span style="font-family: var(--font-serif); font-size: 2rem; font-style: italic; color: var(--color-accent); line-height: 1;">N</span>
                         <span style="font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;">Novus Ateliers</span>
                     </div>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.95rem; max-width: 320px; line-height: 1.6;">Ingegneria del Valore. Progettiamo architetture web di altissimo livello per le aziende di domani.</p>
+                    <p style="color: rgba(255,255,255,0.65); font-size: 0.95rem; max-width: 320px; line-height: 1.6;">Sviluppo Web Sartoriale. Progettiamo architetture web di altissimo livello per brand ed esperienze d'élite.</p>
                 </div>
                 <div style="display: flex; gap: 4rem;">
                     <div style="display: flex; flex-direction: column; gap: 1.2rem;">
@@ -858,8 +971,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="font-size: 0.8rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">&copy; 2026 NOVUS ATELIERS. TUTTI I DIRITTI RISERVATI.</p>
-                <p style="font-size: 0.8rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.4);">OPERATING FROM MILAN, IT / WORLDWIDE.</p>
+                <p style="font-size: 0.8rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.65);">&copy; 2026 NOVUS ATELIERS. TUTTI I DIRITTI RISERVATI.</p>
+                <p style="font-size: 0.8rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.65);">OPERATING FROM MILAN, IT / WORLDWIDE.</p>
             </div>
         </div>
     </footer>
@@ -908,7 +1021,6 @@
                 menuToggle.addEventListener('click', () => {
                     document.body.classList.toggle('menu-open');
                     mobileNav.classList.toggle('active');
-                    /* Rimosso overflow hidden per permettere scroll naturale se il menu è piccolo */
                 });
 
                 mobileLinks.forEach(link => {
