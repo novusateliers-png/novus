@@ -3,11 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Novus Ateliers</title>
+    
+    <!-- SEO & Social Sharing Optimization -->
+    <title>Novus Ateliers | Eccellenza Digitale e Sviluppo Web Sartoriale</title>
+    <meta name="description" content="Novus Ateliers realizza esperienze digitali e siti web altamente personalizzati per aziende e brand. Un approccio artigianale per risultati d'eccellenza.">
+    <meta property="og:title" content="Novus Ateliers | Sviluppo Web Sartoriale">
+    <meta property="og:description" content="Progettiamo architetture web di altissimo livello per brand ed esperienze d'élite. Riservato a progetti ambiziosi.">
+    <meta property="og:image" content="https://novus-ateliers.com/og-preview.jpg"> <!-- Modificare con URL immagine reale -->
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CONFIGURAZIONE CENTRALIZZATA DEI DATI -->
+    <script>
+        const SITE_CONFIG = {
+            email: "novus.ateliers@gmail.com",
+            whatsapp: "WHATSAPP_NUMBER_HERE", // Inserire il numero, es. 393331234567
+            instagram: "https://instagram.com/novus.ateliers", // URL del profilo Instagram
+            foundingProjectsAvailable: 3,
+            startingPrice: "€500"
+        };
+    </script>
 
     <style>
         /* ==========================================================================
@@ -158,14 +178,13 @@
             letter-spacing: 0.1em; opacity: 0.7; transition: opacity 0.3s; position: relative;
         }
         .nav-links a:not(.btn-premium):hover { opacity: 1; }
-        .nav-links a:not(.btn-premium)::after {
+        .nav-links a:not(.btn-premium):::after {
             content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
             background-color: var(--color-accent); transition: width 0.3s ease;
         }
         .nav-links a:not(.btn-premium):hover::after { width: 100%; }
         .nav-links .btn-premium { height: 44px; padding: 0 1.5rem; }
 
-        /* MENU MOBILE DROPDOWN (In alto a destra) */
         .mobile-nav {
             position: fixed; top: 75px; right: var(--space-md);
             width: calc(100vw - (var(--space-md) * 2)); max-width: 300px;
@@ -272,7 +291,6 @@
             padding: 18px; font-family: monospace;
         }
 
-        /* Dettagli Editor di Codice Tecnico */
         .terminal-header {
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px; margin-bottom: 14px;
@@ -299,7 +317,7 @@
         @keyframes orbit { 100% { transform: rotate(360deg); } }
 
         /* ==========================================================================
-           4. TECH STACK (Integrazione Minimalista)
+           4. TECH STACK (Barra Orizzontale fluida)
            ========================================================================== */
         .tech-stack-section {
             background: var(--color-dark);
@@ -310,28 +328,33 @@
         }
         .tech-stack-container {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            flex-direction: row; /* Modificato: forza sempre la riga */
+            align-items: center;
+            gap: 2rem;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox: nasconde la barra */
+            -webkit-overflow-scrolling: touch;
         }
+        .tech-stack-container::-webkit-scrollbar { 
+            display: none; /* Chrome/Safari: nasconde la barra */
+        }
+        
         @media (min-width: 900px) {
-            .tech-stack-container {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
+            .tech-stack-container { justify-content: space-between; overflow-x: visible; }
         }
+        
         .tech-stack-label {
             font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--color-accent);
-            white-space: nowrap;
+            white-space: nowrap; /* Evita a capo */
         }
         .tech-stack-list {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem 2rem;
+            flex-wrap: nowrap; /* Modificato: niente a capo per mantenere lo scorrimento orizzontale */
+            gap: 1.5rem;
             align-items: center;
         }
         .tech-item {
@@ -341,6 +364,7 @@
             letter-spacing: 0.05em;
             color: rgba(255, 255, 255, 0.85);
             text-transform: uppercase;
+            white-space: nowrap;
         }
         .tech-divider {
             color: var(--color-accent);
@@ -349,9 +373,17 @@
         }
 
         /* ==========================================================================
-           5. PROCESSO OPERATIVO (Metodo Sartoriale)
+           5. PROCESSO OPERATIVO E FOUNDING PROJECTS
            ========================================================================== */
         .process-section { padding: var(--space-section) 0; background: var(--color-stone); overflow: hidden; }
+        
+        /* Modifica layout per Progetti di Fondazione a due colonne */
+        @media (min-width: 900px) {
+            .fp-grid { 
+                display: grid; grid-template-columns: 1fr 1fr; 
+                gap: 5rem; align-items: center; 
+            }
+        }
         
         .process-grid {
             display: flex; gap: 0; margin-top: var(--space-lg);
@@ -394,6 +426,53 @@
         .step-number { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; color: var(--color-accent); letter-spacing: 0.1em; text-transform: uppercase; }
         .process-step h3 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; color: var(--color-dark); line-height: 1.1; margin-bottom: 1rem; }
         .process-step p { font-size: 0.95rem; color: #555; line-height: 1.6; }
+
+        /* NUOVO LAYOUT: INVESTMENT LIST - Premium e Animato */
+        .investment-list {
+            display: flex; flex-direction: column; margin-top: 4rem;
+        }
+        .investment-row {
+            display: flex; flex-direction: column; padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border-light);
+            transition: all 0.6s var(--ease-out-expo);
+            position: relative;
+            /* Inizializzazione animazione di scroll */
+            opacity: 0; transform: translateY(20px);
+        }
+        .investment-row.is-revealed { opacity: 1; transform: translateY(0); }
+        
+        .investment-row:first-child { border-top: 1px solid var(--color-border-light); }
+        .dark-mode .investment-row { border-bottom-color: var(--color-border-dark); }
+        .dark-mode .investment-row:first-child { border-top-color: var(--color-border-dark); }
+        
+        /* Accento laterale e Hover */
+        .investment-row::before {
+            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
+            background: var(--color-accent); transform: scaleY(0); transform-origin: center;
+            transition: transform 0.4s var(--ease-out-expo);
+        }
+        .investment-row:hover { padding-left: 1.5rem; background: rgba(0,0,0,0.015); }
+        .investment-row:hover::before { transform: scaleY(1); }
+        
+        @media (min-width: 768px) {
+            .investment-row { flex-direction: row; justify-content: space-between; align-items: center; gap: 3rem; }
+            .inv-info { flex: 1; max-width: 650px; }
+            .inv-price-container { text-align: right; min-width: 220px; }
+        }
+
+        .inv-title { font-family: var(--font-serif); font-size: 2.4rem; line-height: 1.2; margin-bottom: 0.8rem; color: var(--color-dark); transition: color 0.3s; }
+        .investment-row:hover .inv-title { color: var(--color-accent); }
+        
+        .inv-desc { font-size: 1.05rem; color: #555; line-height: 1.6; }
+        
+        .inv-price { 
+            font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; 
+            color: var(--color-dark); letter-spacing: 0.05em; text-transform: uppercase; 
+            margin-top: 1rem; transition: color 0.3s;
+        }
+        .investment-row:hover .inv-price { color: var(--color-accent); }
+        
+        @media (min-width: 768px) { .inv-price { margin-top: 0; } }
 
         /* ==========================================================================
            6. CASI STUDIO - INTATTO
@@ -450,7 +529,7 @@
         .case-block.is-revealed .case-info { transition-delay: 0.2s; }
 
         /* ==========================================================================
-           7. FAQ
+           7. FAQ & TRUST BANNER
            ========================================================================== */
         .faq-section { background: var(--color-stone); padding: var(--space-section) 0; }
         
@@ -498,8 +577,19 @@
         @media (max-width: 768px) { .faq-item.active .faq-answer { padding-left: 0.5rem; padding-right: 0.5rem; } }
         .faq-answer p { color: #555; font-size: 1.05rem; line-height: 1.7; font-weight: 400; max-width: 90%; }
 
+        /* TRUST BANNER */
+        .trust-banner {
+            background: var(--color-dark);
+            text-align: center; padding: 5rem 1rem; border-top: 1px solid var(--color-border-dark);
+            border-bottom: 1px solid var(--color-border-dark);
+        }
+        .trust-text {
+            font-family: var(--font-serif); font-size: clamp(1.8rem, 4vw, 3rem); 
+            line-height: 1.2; color: var(--color-white); font-style: italic; max-width: 900px; margin: 0 auto;
+        }
+
         /* ==========================================================================
-           8. CONTATTI - Form Integrato Senza Card
+           8. CONTATTI - Form Integrato & Canali Aggiunti
            ========================================================================== */
         .contact-section { 
             background: var(--color-stone); padding: var(--space-section) 0; 
@@ -511,17 +601,35 @@
 
         .contact-info p { margin-bottom: 3rem; color: #555; max-width: 450px; font-weight: 400; font-size: 1.1rem; line-height: 1.6; }
         
-        .contact-meta { display: flex; flex-direction: column; gap: 1.5rem; }
+        .contact-meta { display: flex; flex-direction: column; gap: 2rem; }
         .meta-block span { display: block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent); margin-bottom: 0.5rem; }
-        .meta-block a, .meta-block p { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 500; color: var(--color-dark); }
-        .meta-block a { transition: color 0.3s ease; }
-        .meta-block a:hover { color: var(--color-accent); }
+        .meta-block a.standard-link, .meta-block p { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 500; color: var(--color-dark); }
+        .meta-block a.standard-link { transition: color 0.3s ease; }
+        .meta-block a.standard-link:hover { color: var(--color-accent); }
+
+        /* Pulsante WhatsApp Premium */
+        .btn-whatsapp {
+            display: inline-flex; align-items: center; gap: 12px;
+            padding: 12px 28px; background-color: #25D366; color: #FFFFFF;
+            border-radius: 50px; font-family: var(--font-sans); font-weight: 700; font-size: 0.85rem; 
+            text-transform: uppercase; letter-spacing: 0.08em;
+            transition: transform 0.3s var(--ease-out-circ), box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+            margin-top: 0.5rem;
+        }
+        .btn-whatsapp:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            color: #FFFFFF;
+        }
+        .btn-whatsapp svg { width: 22px; height: 22px; fill: currentColor; }
         
         .contact-form-wrapper {
             background: transparent; padding: 0; border: none; box-shadow: none;
         }
 
         .contact-form { display: flex; flex-direction: column; gap: 2.5rem; }
+        .form-microcopy { font-size: 0.95rem; color: #666; margin-bottom: -1rem; font-style: italic; }
         
         .input-group { position: relative; display: flex; flex-direction: column; }
         .input-label { 
@@ -598,10 +706,10 @@
             </a>
             
             <nav class="nav-links">
-                <a href="#processo">Metodologia</a>
-                <a href="#casi-studio">Portfolio</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contatti" class="btn-premium"><span>Avvia un Progetto</span></a>
+                <a href="#processo">Approccio</a>
+                <a href="#casi-studio">Progetti</a>
+                <a href="#investment">Investimento</a>
+                <a href="#contatti" class="btn-premium"><span>Inizia un progetto</span></a>
             </nav>
 
             <button class="menu-toggle js-menu-toggle" aria-label="Menu">
@@ -612,14 +720,14 @@
     </header>
 
     <nav class="mobile-nav js-mobile-nav">
-        <a href="#processo" class="js-mobile-link">Metodologia</a>
-        <a href="#casi-studio" class="js-mobile-link">Portfolio</a>
-        <a href="#faq" class="js-mobile-link">FAQ</a>
+        <a href="#processo" class="js-mobile-link">Approccio</a>
+        <a href="#casi-studio" class="js-mobile-link">Progetti</a>
+        <a href="#investment" class="js-mobile-link">Investimento</a>
         <a href="#contatti" class="js-mobile-link" style="color: var(--color-accent);">Contatti</a>
     </nav>
 
     <main>
-        <!-- HERO SECTION (COPY REVISED TO BOUTIQUE PREMIUM) -->
+        <!-- HERO SECTION (INTATTO) -->
         <section class="hero dark-mode">
             <div class="container hero-layout">
                 <div class="hero-title js-hero-anim">
@@ -670,7 +778,36 @@
             </div>
         </section>
 
-        <!-- TECH STACK SECTION (INTEGRAZIONE) -->
+        <!-- SEZIONE: FOUNDING PROJECTS (Layout bilanciato e testo riscritto) -->
+        <section id="founding-projects" class="process-section dark-mode" style="background: var(--color-dark); color: var(--color-white); border-top: 1px solid var(--color-border-dark);">
+            <div class="container js-reveal">
+                
+                <div class="fp-grid">
+                    <div>
+                        <h2 class="js-wow-reveal wow-title" style="margin-bottom: 1.5rem;">
+                            <span class="mask"><span class="text">Progetti di</span></span><br>
+                            <span class="mask"><span class="text italic-accent">Fondazione.</span></span>
+                        </h2>
+                        <div style="display: inline-block; padding: 0.6rem 1.2rem; border: 1px solid var(--color-accent); border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-accent); margin-bottom: 2rem;">
+                            Solo <span id="config-fp-slots">3</span> Slot Disponibili
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="section-subtitle" style="color: var(--color-white); margin-bottom: 1.5rem; font-size: 1.35rem; font-weight: 400; line-height: 1.5; max-width: 100%;">
+                            Un'opportunità esclusiva riservata ai nostri primissimi clienti. Costruiamo il tuo ecosistema digitale lavorando a diretto contatto con i fondatori dello studio.
+                        </p>
+                        <p style="color: rgba(255,255,255,0.6); margin-bottom: 2.5rem; font-size: 1.05rem; line-height: 1.7;">
+                            Abbiamo deciso di inaugurare Novus Ateliers selezionando <strong>tre progetti unici</strong>. Questa formula garantisce un'attenzione sartoriale assoluta e condizioni economiche irripetibili (con investimento ridotto <span style="color:var(--color-white);">a partire da soli €500</span>). Un'occasione concepita per instaurare partnership durature basate sull'eccellenza.
+                        </p>
+                        <a href="#contatti" class="btn-premium"><span>Invia la tua candidatura</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TECH STACK SECTION (Barra fluida mobile-friendly) -->
         <section class="tech-stack-section">
             <div class="container tech-stack-container js-reveal">
                 <span class="tech-stack-label">Stack Tecnologico</span>
@@ -688,7 +825,7 @@
             </div>
         </section>
 
-        <!-- METODO SECTION (REVISED TONE: VELOCITÀ, DESIGN PERSONALIZZATO, CODICE PROPRIETARIO) -->
+        <!-- METODO SECTION (INTATTO) -->
         <section id="processo" class="process-section">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
@@ -800,79 +937,86 @@
             </div>
         </section>
 
-        <!-- FAQ SECTION -->
-        <section id="faq" class="faq-section">
-            <div class="container faq-grid js-reveal">
+        <!-- SEZIONE: INVESTMENT (Animata e Impreziosita) -->
+        <section id="investment" class="process-section" style="border-bottom: 1px solid var(--color-border-light);">
+            <div class="container js-reveal">
                 
-                <div class="faq-title-sticky">
-                    <h2 style="margin-bottom: 1rem;">Domande<br><span class="italic-accent">Frequenti.</span></h2>
-                    <p style="color: #666; font-size: 1.1rem; max-width: 300px;">I dubbi più comuni delle aziende e dei brand che scelgono di rinnovare la propria presenza digitale.</p>
-                </div>
+                <h2 class="js-wow-reveal wow-title">
+                    <span class="mask"><span class="text">Investimento.</span></span>
+                </h2>
+                <p class="section-subtitle">Non vendiamo pacchetti standard. Costruiamo ecosistemi. Ogni progetto prende forma in base ai suoi obiettivi specifici, alla complessità ingegneristica e all'assoluto livello di personalizzazione richiesto.</p>
                 
-                <div class="faq-accordion">
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Qual è la differenza tra un sito vetrina e le vostre piattaforme?
-                            <span class="faq-icon"></span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>I classici siti utilizzano template pre-fatti (es. WordPress) che nel tempo diventano lenti e vulnerabili. Noi sviluppiamo ecosistemi custom: codice scritto da zero per garantire velocità estrema, sicurezza bancaria e perfetta integrazione con i vostri software interni.</p>
+                <div class="investment-list">
+                    <!-- Riga animata con stagger delay -->
+                    <div class="investment-row js-reveal" style="transition-delay: 0s">
+                        <div class="inv-info">
+                            <h3 class="inv-title">Progetti di Fondazione</h3>
+                            <p class="inv-desc">Riservato a progetti selezionati per la fase iniziale di Novus Ateliers. Collaborazione diretta con disponibilità limitata nel tempo.</p>
+                        </div>
+                        <div class="inv-price-container">
+                            <div class="inv-price">A partire da <span id="config-min-price">€500</span></div>
                         </div>
                     </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Lavorate anche con settori industriali tradizionali?
-                            <span class="faq-icon"></span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Assolutamente sì. Operiamo ampiamente nel manifatturiero, immobiliare, sanità e logistica. È proprio nei settori tradizionali che un'architettura digitale di altissima fascia permette di distaccare nettamente la concorrenza, trasmettendo pura leadership.</p>
+                    
+                    <div class="investment-row js-reveal" style="transition-delay: 0.15s">
+                        <div class="inv-info">
+                            <h3 class="inv-title">Esperienze Digitali Avanzate</h3>
+                            <p class="inv-desc">Architetture digitali evolute per brand e attività con esigenze strutturate, che necessitano di una fluidità visiva superiore.</p>
+                        </div>
+                        <div class="inv-price-container">
+                            <div class="inv-price">A partire da €1.000+</div>
                         </div>
                     </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Quanto tempo richiede lo sviluppo di un progetto completo?
-                            <span class="faq-icon"></span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Dipende dalla complessità dei requisiti e dalle integrazioni API necessarie. Generalmente, per un ecosistema aziendale B2B strutturato, il ciclo di vita (dall'analisi al rilascio) varia dalle 6 alle 12 settimane. Forniamo sempre un cronoprogramma blindato.</p>
+                    
+                    <div class="investment-row js-reveal" style="transition-delay: 0.3s">
+                        <div class="inv-info">
+                            <h3 class="inv-title">Progetti su Misura</h3>
+                            <p class="inv-desc">Infrastrutture tailor-made per ecosistemi complessi, con integrazioni di livello enterprise e performance assolute.</p>
                         </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button class="faq-question">
-                            Siete disponibili per il supporto post-lancio?
-                            <span class="faq-icon"></span>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Il lancio è solo l'inizio. Offriamo piani di affiancamento (SLA) per gestire aggiornamenti di sicurezza ed espansioni. In ogni caso, l'azienda manterrà per sempre la piena e totale proprietà intellettuale (code ownership) del software sviluppato.</p>
+                        <div class="inv-price-container">
+                            <div class="inv-price">Quotazione dedicata</div>
                         </div>
                     </div>
                 </div>
-                
             </div>
         </section>
 
-        <!-- CONTATTI SECTION (WITH ARIA-LABELS ADDED) -->
+        <!-- AREA DI TRUST BANNER -->
+        <div class="trust-banner dark-mode js-reveal">
+            <p class="trust-text">"Ogni progetto prende forma in stretta collaborazione con le persone che lo guidano."</p>
+        </div>
+
+        <!-- CONTATTI SECTION (WhatsApp testo modificato) -->
         <section id="contatti" class="contact-section">
             <div class="container contact-grid">
                 
                 <div class="contact-info js-reveal">
-                    <h2 class="js-wow-reveal wow-title" style="margin-bottom: var(--space-md);">
-                        <span class="mask"><span class="text">Avvia una</span></span><br>
-                        <span class="mask"><span class="text italic-accent">conversazione.</span></span>
+                    <h2 class="js-wow-reveal wow-title" style="margin-bottom: 1rem;">
+                        <span class="mask"><span class="text">La tua prossima esperienza</span></span><br>
+                        <span class="mask"><span class="text italic-accent">digitale inizia da qui.</span></span>
                     </h2>
-                    <p>Mettiti in contatto con i nostri Architect per valutare la fattibilità e i requisiti del tuo prossimo ecosistema digitale. Rispondiamo entro 24 ore operative.</p>
+                    <p>Mettiti in contatto con i nostri Architect per discutere l'identità e gli obiettivi del tuo prossimo progetto d'eccellenza.</p>
                     
-                    <div class="contact-meta">
+                    <div class="contact-meta" style="margin-top: 2rem;">
                         <div class="meta-block">
-                            <span>Email Diretta</span>
-                            <a href="mailto:novus.ateliers@gmail.com">novus.ateliers@gmail.com</a>
+                            <span>Email Professionale</span>
+                            <a href="#" class="standard-link js-email-link">Email</a>
                         </div>
-                        <div class="meta-block">
-                            <span>Operatività</span>
-                            <p>Milano, IT / Worldwide</p>
+                        
+                        <!-- Pulsante WhatsApp -->
+                        <div class="meta-block" style="margin-top: 0.5rem;">
+                            <span>WhatsApp Diretto</span>
+                            <a href="#" id="wa-link" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M12.031 0C5.385 0 .001 5.384.001 12.031c0 2.122.553 4.195 1.603 6.013L.001 24l6.115-1.605c1.761.947 3.753 1.447 5.914 1.447 6.646 0 12.03-5.383 12.03-12.03S18.677 0 12.031 0zm0 21.84c-1.802 0-3.565-.484-5.11-1.4l-.367-.217-3.793.995.996-3.702-.239-.378c-1.004-1.589-1.533-3.418-1.533-5.309 0-5.564 4.528-10.093 10.092-10.093 5.565 0 10.092 4.529 10.092 10.093 0 5.565-4.527 10.093-10.092 10.093h.051zm5.539-7.558c-.303-.153-1.796-.887-2.073-.988-.277-.101-.479-.153-.68.153-.202.305-.783.988-.96 1.19-.176.202-.353.228-.656.075-.303-.151-1.282-.473-2.441-1.507-.903-.806-1.512-1.8-1.689-2.105-.177-.305-.019-.47.133-.62.136-.135.303-.353.454-.531.151-.177.202-.303.303-.505.101-.202.05-.378-.026-.531-.075-.151-.68-1.642-.931-2.247-.245-.589-.495-.51-.68-.519-.176-.008-.378-.01-.58-.01-.202 0-.53.076-.807.378-.277.303-1.06 1.036-1.06 2.527 0 1.492 1.085 2.933 1.236 3.136.152.203 2.138 3.265 5.178 4.577.722.312 1.286.498 1.727.638.725.23 1.386.197 1.905.119.584-.087 1.796-.734 2.049-1.442.252-.708.252-1.314.177-1.442-.075-.128-.277-.204-.58-.356z"/>
+                                </svg>
+                                Start a conversation
+                            </a>
+                        </div>
+
+                        <div class="meta-block" style="margin-top: 0.5rem;">
+                            <span>Instagram</span>
+                            <a href="#" class="standard-link js-ig-link" target="_blank" rel="noopener noreferrer">Esplora l'estetica</a>
                         </div>
                     </div>
                 </div>
@@ -882,19 +1026,21 @@
                         <input type="hidden" name="_subject" value="Nuova richiesta di consulenza da Novus Ateliers">
                         <input type="hidden" name="_captcha" value="false">
                         
+                        <p class="form-microcopy">Parlaci della tua idea. Ti risponderemo personalmente.</p>
+
                         <div class="input-group">
-                            <input type="text" id="name" name="name" class="premium-input" placeholder=" " aria-label="Nome e Azienda *" required>
-                            <label for="name" class="input-label">Nome e Azienda *</label>
+                            <input type="text" id="name" name="name" class="premium-input" placeholder=" " aria-label="Nome & Azienda / Brand *" required>
+                            <label for="name" class="input-label">Nome & Azienda / Brand *</label>
                         </div>
                         
                         <div class="input-group">
-                            <input type="email" id="email" name="email" class="premium-input" placeholder=" " aria-label="Email lavorativa *" required>
-                            <label for="email" class="input-label">Email lavorativa *</label>
+                            <input type="email" id="email" name="email" class="premium-input" placeholder=" " aria-label="Indirizzo Email *" required>
+                            <label for="email" class="input-label">Indirizzo Email *</label>
                         </div>
                         
                         <div class="input-group">
-                            <textarea id="details" name="details" rows="3" class="premium-input" style="resize: vertical;" placeholder=" " aria-label="Di cosa hai bisogno? *" required></textarea>
-                            <label for="details" class="input-label">Di cosa hai bisogno? *</label>
+                            <textarea id="details" name="details" rows="3" class="premium-input" style="resize: vertical;" placeholder=" " aria-label="Cosa desideri realizzare? *" required></textarea>
+                            <label for="details" class="input-label">Cosa desideri realizzare? *</label>
                         </div>
                         
                         <p style="font-size: 0.8rem; color: #888; font-weight: 400; line-height: 1.4;">
@@ -902,7 +1048,7 @@
                         </p>
 
                         <button type="submit" class="btn-premium btn-submit" style="width: 100%; margin-top: 0.5rem;">
-                            <span>Invia Richiesta Formale</span>
+                            <span>Invia Richiesta</span>
                         </button>
                     </form>
                 </div>
@@ -911,7 +1057,7 @@
         </section>
     </main>
 
-    <!-- MODALS -->
+    <!-- MODALS (INTATTI) -->
     <div id="privacy-modal" class="legal-modal">
         <div class="modal-content">
             <button class="modal-close js-close-modal">&times;</button>
@@ -919,7 +1065,7 @@
             <p>La presente Privacy Policy descrive le modalità di gestione del sito web in riferimento al trattamento dei dati personali degli utenti che lo consultano e che interagiscono con i nostri servizi web (form di contatto).</p>
             
             <h4>1. Titolare del Trattamento</h4>
-            <p>Novus Ateliers.<br>Email: novus.ateliers@gmail.com<br></p>
+            <p>Novus Ateliers.<br>Email: <a href="#" class="standard-link js-email-link" style="text-decoration: underline;">Email</a><br></p>
             
             <h4>2. Tipologia di dati e finalità</h4>
             <p>L'invio facoltativo e volontario di messaggi tramite il modulo comporta l'acquisizione dell'indirizzo del mittente, necessario per rispondere, nonché degli eventuali altri dati inseriti. I dati sono usati al solo fine di eseguire la prestazione richiesta in ambito B2B.</p>
@@ -945,7 +1091,7 @@
         </div>
     </div>
 
-    <!-- FOOTER (COLORI A11Y AGGIORNATI) -->
+    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
@@ -955,13 +1101,20 @@
                         <span style="font-family: var(--font-sans); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;">Novus Ateliers</span>
                     </div>
                     <p style="color: rgba(255,255,255,0.65); font-size: 0.95rem; max-width: 320px; line-height: 1.6;">Sviluppo Web Sartoriale. Progettiamo architetture web di altissimo livello per brand ed esperienze d'élite.</p>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#" class="js-ig-link" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; letter-spacing: 0.1em; color: var(--color-accent); text-transform: uppercase; font-weight: 700; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--color-accent)'">
+                            Seguici su Instagram
+                            <svg style="width: 14px; height: 14px; vertical-align: middle; margin-left: 4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
                 </div>
                 <div style="display: flex; gap: 4rem;">
                     <div style="display: flex; flex-direction: column; gap: 1.2rem;">
                         <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent);">Esplora</span>
-                        <a href="#processo" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Metodologia</a>
-                        <a href="#casi-studio" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Portfolio</a>
-                        <a href="#faq" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">FAQ</a>
+                        <a href="#processo" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Approccio</a>
+                        <a href="#casi-studio" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Progetti</a>
+                        <a href="#investment" style="font-size: 0.95rem; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Investimento</a>
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 1.2rem;">
                         <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-accent);">Legal</span>
@@ -980,6 +1133,35 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            /* --- INIZIALIZZAZIONE CONFIGURAZIONE (Email, WhatsApp, Instagram, Prezzi) --- */
+            
+            // Popola link WhatsApp
+            const waLink = document.getElementById('wa-link');
+            if(waLink && SITE_CONFIG.whatsapp && SITE_CONFIG.whatsapp !== "WHATSAPP_NUMBER_HERE") {
+                waLink.href = `https://wa.me/${SITE_CONFIG.whatsapp}`;
+            } else if (waLink) {
+                waLink.href = "#"; // Evita crash se numero mancante
+            }
+
+            // Popola link Instagram globali
+            const igLinks = document.querySelectorAll('.js-ig-link');
+            igLinks.forEach(link => { link.href = SITE_CONFIG.instagram; });
+
+            // Popola link Email
+            const emailLinks = document.querySelectorAll('.js-email-link');
+            emailLinks.forEach(link => { 
+                link.href = `mailto:${SITE_CONFIG.email}`;
+                link.textContent = SITE_CONFIG.email;
+            });
+
+            // Popola Pricing e Copie Parametriche
+            const minPriceEl = document.getElementById('config-min-price');
+            if(minPriceEl) minPriceEl.textContent = SITE_CONFIG.startingPrice;
+
+            const fpSlotsEl = document.getElementById('config-fp-slots');
+            if(fpSlotsEl) fpSlotsEl.textContent = SITE_CONFIG.foundingProjectsAvailable;
+
+
             /* --- 0. Gestione Modals (Privacy e Cookie) --- */
             const openModalBtns = document.querySelectorAll('.js-open-modal');
             const closeBtns = document.querySelectorAll('.js-close-modal');
@@ -1049,7 +1231,8 @@
             }, 100);
 
             /* --- 3. Scroll Reveal --- */
-            const reveals = document.querySelectorAll('.js-reveal, .js-wow-reveal, .process-grid');
+            // Ora includiamo anche le righe dell'investimento per l'animazione di entrata
+            const reveals = document.querySelectorAll('.js-reveal, .js-wow-reveal, .process-grid, .investment-row');
             const scrollObserver = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1063,7 +1246,7 @@
 
             /* --- 4. Logica Header --- */
             const header = document.querySelector('.js-header');
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('section, .trust-banner');
             
             window.addEventListener('scroll', () => {
                 let isDarkModeSection = false;
@@ -1121,8 +1304,11 @@
                     contactForm.querySelector('button').disabled = true;
 
                     const formData = new FormData(contactForm);
+                    
+                    // Endpoint integrato con la costante (fallback se la costante fallisce)
+                    const formAction = `https://formsubmit.co/ajax/${SITE_CONFIG.email}`;
 
-                    fetch("https://formsubmit.co/ajax/novus.ateliers@gmail.com", {
+                    fetch(formAction, {
                         method: "POST",
                         body: formData
                     })
@@ -1134,7 +1320,7 @@
                                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" style="width: 24px; height: 24px;"><path d="M20 6L9 17l-5-5"/></svg>
                                 </div>
                                 <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Ricevuto.</h3>
-                                <p style="color: #444; font-size: 1rem; font-weight: 400;">La tua richiesta è stata registrata dai nostri sistemi. Un nostro Architect ti contatterà entro 24 ore.</p>
+                                <p style="color: #444; font-size: 1rem; font-weight: 400;">La tua richiesta è stata registrata dai nostri sistemi. Un nostro Architect ti contatterà personalmente.</p>
                             </div>
                         `;
                     })
