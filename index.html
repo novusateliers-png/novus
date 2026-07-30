@@ -22,8 +22,8 @@
     <script>
         const SITE_CONFIG = {
             email: "novus.ateliers@gmail.com",
-            whatsapp: "3204445814", // Inserire il numero, es. 393331234567
-            instagram: "https://instagram.com/novus.ateliers", // URL del profilo Instagram
+            whatsapp: "393204445814",
+            instagram: "https://instagram.com/novus.ateliers",
             foundingProjectsAvailable: 3,
             startingPrice: "€500"
         };
@@ -70,7 +70,6 @@
             overflow-x: hidden; 
         }
 
-        /* Noise leggerissimo per texture elegante */
         .noise-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 9999; opacity: 0.03; 
@@ -84,7 +83,6 @@
         
         .container { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 var(--space-md); position: relative; }
         
-        /* TIPOGRAFIA & ANIMAZIONI TITOLI */
         h2 { 
             font-size: clamp(3rem, 2rem + 4vw, 5.5rem); 
             letter-spacing: -0.03em; 
@@ -111,7 +109,6 @@
         .js-wow-reveal.is-revealed .mask:nth-child(2) .text { transition-delay: 0.05s; }
         .js-wow-reveal.is-revealed .mask:nth-child(3) .text { transition-delay: 0.1s; }
 
-        /* BUTTONS - Stile Atelier Premium */
         .btn-premium { 
             display: inline-flex; align-items: center; justify-content: center;
             padding: 0 2rem; height: 52px;
@@ -154,7 +151,6 @@
         
         .header-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         
-        /* LOGO TIPOGRAFICO ELEGANTE */
         .brand-logo { display: flex; align-items: center; gap: 12px; }
         .logo-mark {
             font-family: var(--font-serif);
@@ -227,7 +223,7 @@
         }
 
         /* ==========================================================================
-           3. HERO (Elemento 3D Tecnico / Terminale)
+           3. HERO
            ========================================================================== */
         .hero { 
             min-height: 100vh; display: flex; align-items: center; 
@@ -259,7 +255,6 @@
             opacity: 0; transform: translateY(20px);
         }
 
-        /* 3D Glassmorphism Terminal UI */
         .hero-visual { 
             position: relative; height: 360px; width: 100%; perspective: 1200px; 
             display: flex; justify-content: center; align-items: center;
@@ -317,7 +312,7 @@
         @keyframes orbit { 100% { transform: rotate(360deg); } }
 
         /* ==========================================================================
-           4. TECH STACK (Barra Orizzontale fluida)
+           4. TECH STACK
            ========================================================================== */
         .tech-stack-section {
             background: var(--color-dark);
@@ -328,15 +323,15 @@
         }
         .tech-stack-container {
             display: flex;
-            flex-direction: row; /* Modificato: forza sempre la riga */
+            flex-direction: row; 
             align-items: center;
             gap: 2rem;
             overflow-x: auto;
-            scrollbar-width: none; /* Firefox: nasconde la barra */
+            scrollbar-width: none; 
             -webkit-overflow-scrolling: touch;
         }
         .tech-stack-container::-webkit-scrollbar { 
-            display: none; /* Chrome/Safari: nasconde la barra */
+            display: none; 
         }
         
         @media (min-width: 900px) {
@@ -349,11 +344,11 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: var(--color-accent);
-            white-space: nowrap; /* Evita a capo */
+            white-space: nowrap; 
         }
         .tech-stack-list {
             display: flex;
-            flex-wrap: nowrap; /* Modificato: niente a capo per mantenere lo scorrimento orizzontale */
+            flex-wrap: nowrap; 
             gap: 1.5rem;
             align-items: center;
         }
@@ -377,7 +372,6 @@
            ========================================================================== */
         .process-section { padding: var(--space-section) 0; background: var(--color-stone); overflow: hidden; }
         
-        /* Modifica layout per Progetti di Fondazione a due colonne */
         @media (min-width: 900px) {
             .fp-grid { 
                 display: grid; grid-template-columns: 1fr 1fr; 
@@ -427,52 +421,94 @@
         .process-step h3 { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 400; color: var(--color-dark); line-height: 1.1; margin-bottom: 1rem; }
         .process-step p { font-size: 0.95rem; color: #555; line-height: 1.6; }
 
-        /* NUOVO LAYOUT: INVESTMENT LIST - Premium e Animato */
-        .investment-list {
-            display: flex; flex-direction: column; margin-top: 4rem;
+        /* ==========================================================================
+           NUOVO DESIGN: INVESTMENT - Stile Editoriale / Sartoriale
+           ========================================================================== */
+        .editorial-pricing-list {
+            display: flex; flex-direction: column;
+            margin-top: 3rem;
+            border-top: 1px solid var(--color-dark);
         }
-        .investment-row {
-            display: flex; flex-direction: column; padding: 3rem 0;
+        
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 3rem 0;
             border-bottom: 1px solid var(--color-border-light);
-            transition: all 0.6s var(--ease-out-expo);
+            transition: transform 0.5s var(--ease-out-expo), padding-left 0.5s var(--ease-out-expo);
             position: relative;
-            /* Inizializzazione animazione di scroll */
             opacity: 0; transform: translateY(20px);
         }
-        .investment-row.is-revealed { opacity: 1; transform: translateY(0); }
         
-        .investment-row:first-child { border-top: 1px solid var(--color-border-light); }
-        .dark-mode .investment-row { border-bottom-color: var(--color-border-dark); }
-        .dark-mode .investment-row:first-child { border-top-color: var(--color-border-dark); }
-        
-        /* Accento laterale e Hover */
-        .investment-row::before {
-            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 3px;
-            background: var(--color-accent); transform: scaleY(0); transform-origin: center;
-            transition: transform 0.4s var(--ease-out-expo);
-        }
-        .investment-row:hover { padding-left: 1.5rem; background: rgba(0,0,0,0.015); }
-        .investment-row:hover::before { transform: scaleY(1); }
-        
-        @media (min-width: 768px) {
-            .investment-row { flex-direction: row; justify-content: space-between; align-items: center; gap: 3rem; }
-            .inv-info { flex: 1; max-width: 650px; }
-            .inv-price-container { text-align: right; min-width: 220px; }
+        .pricing-row.is-revealed {
+            opacity: 1; transform: translateY(0);
         }
 
-        .inv-title { font-family: var(--font-serif); font-size: 2.4rem; line-height: 1.2; margin-bottom: 0.8rem; color: var(--color-dark); transition: color 0.3s; }
-        .investment-row:hover .inv-title { color: var(--color-accent); }
-        
-        .inv-desc { font-size: 1.05rem; color: #555; line-height: 1.6; }
-        
-        .inv-price { 
-            font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; 
-            color: var(--color-dark); letter-spacing: 0.05em; text-transform: uppercase; 
-            margin-top: 1rem; transition: color 0.3s;
+        @media (min-width: 900px) {
+            .pricing-row {
+                grid-template-columns: 80px 1fr 300px;
+                gap: 2rem;
+                align-items: center;
+            }
+            .pricing-row:hover {
+                padding-left: 2rem;
+                border-bottom-color: var(--color-accent);
+            }
         }
-        .investment-row:hover .inv-price { color: var(--color-accent); }
-        
-        @media (min-width: 768px) { .inv-price { margin-top: 0; } }
+
+        .row-num {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .row-content h3 {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            color: var(--color-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .row-content p {
+            font-size: 1.05rem;
+            color: #555;
+            max-width: 650px;
+            line-height: 1.6;
+        }
+
+        .row-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        @media (min-width: 900px) {
+            .row-price {
+                align-items: flex-end;
+                text-align: right;
+            }
+        }
+
+        .row-price .price-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .row-price .price-val {
+            font-family: var(--font-sans);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            line-height: 1;
+        }
 
         /* ==========================================================================
            6. CASI STUDIO - INTATTO
@@ -589,7 +625,7 @@
         }
 
         /* ==========================================================================
-           8. CONTATTI - Form Integrato & Canali Aggiunti
+           8. CONTATTI
            ========================================================================== */
         .contact-section { 
             background: var(--color-stone); padding: var(--space-section) 0; 
@@ -607,7 +643,6 @@
         .meta-block a.standard-link { transition: color 0.3s ease; }
         .meta-block a.standard-link:hover { color: var(--color-accent); }
 
-        /* Pulsante WhatsApp Premium */
         .btn-whatsapp {
             display: inline-flex; align-items: center; gap: 12px;
             padding: 12px 28px; background-color: #25D366; color: #FFFFFF;
@@ -727,7 +762,7 @@
     </nav>
 
     <main>
-        <!-- HERO SECTION (INTATTO) -->
+        <!-- HERO SECTION -->
         <section class="hero dark-mode">
             <div class="container hero-layout">
                 <div class="hero-title js-hero-anim">
@@ -736,7 +771,6 @@
                     <p class="hero-subtitle">Architetture Digitali ad Alte Prestazioni e Design su Misura. Come studio atelier d'eccellenza, realizziamo infrastrutture proprietarie d'élite per chi esige maestria artigianale e prestazioni senza compromessi.</p>
                 </div>
                 
-                <!-- HERO VISUAL: TERMINAL & EDITOR DI CODICE -->
                 <div class="hero-visual" aria-hidden="true">
                     <div class="ui-system">
                         <div class="orb orb-1"></div>
@@ -778,7 +812,7 @@
             </div>
         </section>
 
-        <!-- SEZIONE: FOUNDING PROJECTS (Layout bilanciato e testo riscritto) -->
+        <!-- SEZIONE: FOUNDING PROJECTS -->
         <section id="founding-projects" class="process-section dark-mode" style="background: var(--color-dark); color: var(--color-white); border-top: 1px solid var(--color-border-dark);">
             <div class="container js-reveal">
                 
@@ -807,7 +841,7 @@
             </div>
         </section>
 
-        <!-- TECH STACK SECTION (Barra fluida mobile-friendly) -->
+        <!-- TECH STACK SECTION -->
         <section class="tech-stack-section">
             <div class="container tech-stack-container js-reveal">
                 <span class="tech-stack-label">Stack Tecnologico</span>
@@ -825,7 +859,7 @@
             </div>
         </section>
 
-        <!-- METODO SECTION (INTATTO) -->
+        <!-- METODO SECTION -->
         <section id="processo" class="process-section">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
@@ -872,7 +906,7 @@
             </div>
         </section>
 
-        <!-- CASI STUDIO SECTION (RIGOROSAMENTE INTATTO) -->
+        <!-- CASI STUDIO SECTION -->
         <section id="casi-studio" class="cases-section dark-mode">
             <div class="container">
                 <h2 class="js-wow-reveal wow-title">
@@ -937,47 +971,56 @@
             </div>
         </section>
 
-        <!-- SEZIONE: INVESTMENT (Animata e Impreziosita) -->
+        <!-- SEZIONE: INVESTMENT (Design Editoriale / Atelier - Modificato come richiesto) -->
         <section id="investment" class="process-section" style="border-bottom: 1px solid var(--color-border-light);">
-            <div class="container js-reveal">
+            <div class="container">
                 
                 <h2 class="js-wow-reveal wow-title">
-                    <span class="mask"><span class="text">Investimento.</span></span>
+                    <span class="mask"><span class="text">L'investimento.</span></span>
                 </h2>
-                <p class="section-subtitle">Non vendiamo pacchetti standard. Costruiamo ecosistemi. Ogni progetto prende forma in base ai suoi obiettivi specifici, alla complessità ingegneristica e all'assoluto livello di personalizzazione richiesto.</p>
+                <p class="section-subtitle js-reveal">Non vendiamo pacchetti standard. Costruiamo ecosistemi. Ogni opera prende forma in base ai suoi obiettivi specifici, alla complessità ingegneristica e all'assoluto livello di personalizzazione richiesto.</p>
                 
-                <div class="investment-list">
-                    <!-- Riga animata con stagger delay -->
-                    <div class="investment-row js-reveal" style="transition-delay: 0s">
-                        <div class="inv-info">
-                            <h3 class="inv-title">Progetti di Fondazione</h3>
-                            <p class="inv-desc">Riservato a progetti selezionati per la fase iniziale di Novus Ateliers. Collaborazione diretta con disponibilità limitata nel tempo.</p>
-                        </div>
-                        <div class="inv-price-container">
-                            <div class="inv-price">A partire da <span id="config-min-price">€500</span></div>
-                        </div>
-                    </div>
+                <!-- Layout Editoriale List-based -->
+                <div class="editorial-pricing-list">
                     
-                    <div class="investment-row js-reveal" style="transition-delay: 0.15s">
-                        <div class="inv-info">
-                            <h3 class="inv-title">Esperienze Digitali Avanzate</h3>
-                            <p class="inv-desc">Architetture digitali evolute per brand e attività con esigenze strutturate, che necessitano di una fluidità visiva superiore.</p>
+                    <div class="pricing-row js-reveal" style="transition-delay: 0s;">
+                        <div class="row-num">01</div>
+                        <div class="row-content">
+                            <h3>Progetti di Fondazione</h3>
+                            <p>Riservato esclusivamente a tre progetti selezionati per la fase di lancio del nostro Atelier. Collaborazione diretta con disponibilità limitata nel tempo.</p>
                         </div>
-                        <div class="inv-price-container">
-                            <div class="inv-price">A partire da €1.000+</div>
-                        </div>
-                    </div>
-                    
-                    <div class="investment-row js-reveal" style="transition-delay: 0.3s">
-                        <div class="inv-info">
-                            <h3 class="inv-title">Progetti su Misura</h3>
-                            <p class="inv-desc">Infrastrutture tailor-made per ecosistemi complessi, con integrazioni di livello enterprise e performance assolute.</p>
-                        </div>
-                        <div class="inv-price-container">
-                            <div class="inv-price">Quotazione dedicata</div>
+                        <div class="row-price">
+                            <span class="price-label">Quotazione iniziale</span>
+                            <span class="price-val">da <span id="config-min-price">€500</span></span>
                         </div>
                     </div>
+
+                    <div class="pricing-row js-reveal" style="transition-delay: 0.15s;">
+                        <div class="row-num">02</div>
+                        <div class="row-content">
+                            <h3>Architetture Evolute</h3>
+                            <p>Esperienze digitali di alto profilo per brand con esigenze strutturate, che necessitano di fluidità visiva superiore, animazioni custom e infrastrutture ad alte prestazioni.</p>
+                        </div>
+                        <div class="row-price">
+                            <span class="price-label">Quotazione iniziale</span>
+                            <span class="price-val">da €1.000</span>
+                        </div>
+                    </div>
+
+                    <div class="pricing-row js-reveal" style="transition-delay: 0.3s;">
+                        <div class="row-num">03</div>
+                        <div class="row-content">
+                            <h3>Ecosistemi su Misura</h3>
+                            <p>Progettazione ingegneristica completa per piattaforme complesse. Soluzioni tailor-made con integrazioni di livello enterprise, API dedicate e performance assolute.</p>
+                        </div>
+                        <div class="row-price">
+                            <span class="price-label">Investimento</span>
+                            <span class="price-val">Privato</span>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
         </section>
 
@@ -986,7 +1029,7 @@
             <p class="trust-text">"Ogni progetto prende forma in stretta collaborazione con le persone che lo guidano."</p>
         </div>
 
-        <!-- CONTATTI SECTION (WhatsApp testo modificato) -->
+        <!-- CONTATTI SECTION -->
         <section id="contatti" class="contact-section">
             <div class="container contact-grid">
                 
@@ -1003,10 +1046,9 @@
                             <a href="#" class="standard-link js-email-link">Email</a>
                         </div>
                         
-                        <!-- Pulsante WhatsApp -->
                         <div class="meta-block" style="margin-top: 0.5rem;">
                             <span>WhatsApp Diretto</span>
-                            <a href="#" id="wa-link" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                            <a href="https://wa.me/393204445814" id="wa-link" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M12.031 0C5.385 0 .001 5.384.001 12.031c0 2.122.553 4.195 1.603 6.013L.001 24l6.115-1.605c1.761.947 3.753 1.447 5.914 1.447 6.646 0 12.03-5.383 12.03-12.03S18.677 0 12.031 0zm0 21.84c-1.802 0-3.565-.484-5.11-1.4l-.367-.217-3.793.995.996-3.702-.239-.378c-1.004-1.589-1.533-3.418-1.533-5.309 0-5.564 4.528-10.093 10.092-10.093 5.565 0 10.092 4.529 10.092 10.093 0 5.565-4.527 10.093-10.092 10.093h.051zm5.539-7.558c-.303-.153-1.796-.887-2.073-.988-.277-.101-.479-.153-.68.153-.202.305-.783.988-.96 1.19-.176.202-.353.228-.656.075-.303-.151-1.282-.473-2.441-1.507-.903-.806-1.512-1.8-1.689-2.105-.177-.305-.019-.47.133-.62.136-.135.303-.353.454-.531.151-.177.202-.303.303-.505.101-.202.05-.378-.026-.531-.075-.151-.68-1.642-.931-2.247-.245-.589-.495-.51-.68-.519-.176-.008-.378-.01-.58-.01-.202 0-.53.076-.807.378-.277.303-1.06 1.036-1.06 2.527 0 1.492 1.085 2.933 1.236 3.136.152.203 2.138 3.265 5.178 4.577.722.312 1.286.498 1.727.638.725.23 1.386.197 1.905.119.584-.087 1.796-.734 2.049-1.442.252-.708.252-1.314.177-1.442-.075-.128-.277-.204-.58-.356z"/>
                                 </svg>
@@ -1025,6 +1067,8 @@
                     <form class="contact-form js-form" action="#" method="POST">
                         <input type="hidden" name="_subject" value="Nuova richiesta di consulenza da Novus Ateliers">
                         <input type="hidden" name="_captcha" value="false">
+                        <!-- Impostazione per il redirect in caso JS fallisca -->
+                        <input type="hidden" name="_next" value="#">
                         
                         <p class="form-microcopy">Parlaci della tua idea. Ti risponderemo personalmente.</p>
 
@@ -1057,7 +1101,7 @@
         </section>
     </main>
 
-    <!-- MODALS (INTATTI) -->
+    <!-- MODALS -->
     <div id="privacy-modal" class="legal-modal">
         <div class="modal-content">
             <button class="modal-close js-close-modal">&times;</button>
@@ -1133,28 +1177,21 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            /* --- INIZIALIZZAZIONE CONFIGURAZIONE (Email, WhatsApp, Instagram, Prezzi) --- */
-            
-            // Popola link WhatsApp
+            /* --- INIZIALIZZAZIONE CONFIGURAZIONE --- */
             const waLink = document.getElementById('wa-link');
-            if(waLink && SITE_CONFIG.whatsapp && SITE_CONFIG.whatsapp !== "3204445814") {
+            if(waLink && SITE_CONFIG.whatsapp) {
                 waLink.href = `https://wa.me/${SITE_CONFIG.whatsapp}`;
-            } else if (waLink) {
-                waLink.href = "#"; // Evita crash se numero mancante
             }
 
-            // Popola link Instagram globali
             const igLinks = document.querySelectorAll('.js-ig-link');
             igLinks.forEach(link => { link.href = SITE_CONFIG.instagram; });
 
-            // Popola link Email
             const emailLinks = document.querySelectorAll('.js-email-link');
             emailLinks.forEach(link => { 
                 link.href = `mailto:${SITE_CONFIG.email}`;
                 link.textContent = SITE_CONFIG.email;
             });
 
-            // Popola Pricing e Copie Parametriche
             const minPriceEl = document.getElementById('config-min-price');
             if(minPriceEl) minPriceEl.textContent = SITE_CONFIG.startingPrice;
 
@@ -1162,7 +1199,7 @@
             if(fpSlotsEl) fpSlotsEl.textContent = SITE_CONFIG.foundingProjectsAvailable;
 
 
-            /* --- 0. Gestione Modals (Privacy e Cookie) --- */
+            /* --- 0. Gestione Modals --- */
             const openModalBtns = document.querySelectorAll('.js-open-modal');
             const closeBtns = document.querySelectorAll('.js-close-modal');
             const modals = document.querySelectorAll('.legal-modal');
@@ -1194,7 +1231,7 @@
                 });
             });
 
-            /* --- 1. Gestione Menu Mobile Dropdown --- */
+            /* --- 1. Gestione Menu Mobile --- */
             const menuToggle = document.querySelector('.js-menu-toggle');
             const mobileNav = document.querySelector('.js-mobile-nav');
             const mobileLinks = document.querySelectorAll('.js-mobile-link');
@@ -1213,7 +1250,7 @@
                 });
             }
 
-            /* --- 2. Animazione Hero al Caricamento --- */
+            /* --- 2. Animazione Hero --- */
             const heroLines = document.querySelectorAll('.hero-title .line span');
             const heroSub = document.querySelector('.hero-subtitle');
             
@@ -1231,8 +1268,7 @@
             }, 100);
 
             /* --- 3. Scroll Reveal --- */
-            // Ora includiamo anche le righe dell'investimento per l'animazione di entrata
-            const reveals = document.querySelectorAll('.js-reveal, .js-wow-reveal, .process-grid, .investment-row');
+            const reveals = document.querySelectorAll('.js-reveal, .js-wow-reveal, .process-grid, .pricing-row');
             const scrollObserver = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1271,29 +1307,7 @@
                 }
             }, { passive: true });
 
-            /* --- 5. Accordion FAQ fluido --- */
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            faqQuestions.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const faqItem = btn.parentElement;
-                    const answer = faqItem.querySelector('.faq-answer');
-                    const isActive = faqItem.classList.contains('active');
-
-                    // Chiudi tutte
-                    document.querySelectorAll('.faq-item').forEach(item => {
-                        item.classList.remove('active');
-                        item.querySelector('.faq-answer').style.maxHeight = null;
-                    });
-
-                    // Se non era attiva, aprila dinamicamente
-                    if (!isActive) {
-                        faqItem.classList.add('active');
-                        answer.style.maxHeight = answer.scrollHeight + 60 + "px"; 
-                    }
-                });
-            });
-
-            /* --- 6. Validazione e Invio Form tramite FormSubmit --- */
+            /* --- 5. Validazione e Invio Form tramite FormSubmit (Formato JSON) --- */
             const contactForm = document.querySelector('.js-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', (e) => {
@@ -1303,30 +1317,46 @@
                     submitBtn.textContent = "Invio in corso...";
                     contactForm.querySelector('button').disabled = true;
 
+                    // Creazione oggetto JSON a partire dal FormData per compatibilità perfetta FormSubmit AJAX
                     const formData = new FormData(contactForm);
+                    const formDataObj = Object.fromEntries(formData.entries());
                     
-                    // Endpoint integrato con la costante (fallback se la costante fallisce)
                     const formAction = `https://formsubmit.co/ajax/${SITE_CONFIG.email}`;
 
                     fetch(formAction, {
                         method: "POST",
-                        body: formData
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(formDataObj)
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) throw new Error("Errore Network");
+                        return response.json();
+                    })
                     .then(data => {
                         contactForm.parentElement.innerHTML = `
-                            <div style="padding: 2rem 0; text-align: left;">
+                            <div style="padding: 2rem 0; text-align: left; opacity: 0; animation: fadeIn 0.8s ease forwards;">
+                                <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }</style>
                                 <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(178, 144, 84, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" style="width: 24px; height: 24px;"><path d="M20 6L9 17l-5-5"/></svg>
                                 </div>
-                                <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Ricevuto.</h3>
-                                <p style="color: #444; font-size: 1rem; font-weight: 400;">La tua richiesta è stata registrata dai nostri sistemi. Un nostro Architect ti contatterà personalmente.</p>
+                                <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Richiesta Inviata.</h3>
+                                <p style="color: #444; font-size: 1rem; font-weight: 400; line-height: 1.6;">I tuoi dettagli sono stati trasmessi con successo a ${SITE_CONFIG.email}. Un nostro Architect analizzerà la tua richiesta e ti contatterà a breve.</p>
                             </div>
                         `;
                     })
                     .catch(error => {
-                        submitBtn.textContent = "Errore di connessione. Riprova.";
+                        console.error("FormSubmit Error:", error);
+                        submitBtn.textContent = "Errore. Riprova più tardi.";
                         contactForm.querySelector('button').disabled = false;
+                        
+                        // Fallback in caso di blocco CORS o altri problemi (invia tramite post normale)
+                        setTimeout(() => {
+                            contactForm.action = `https://formsubmit.co/${SITE_CONFIG.email}`;
+                            contactForm.submit();
+                        }, 2000);
                     });
                 });
             }
