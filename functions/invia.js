@@ -1,19 +1,19 @@
 export async function onRequestPost(context) {
     try {
-        // 1. ECCO LA MODIFICA: Leggiamo i dati nel formato nativo dei form HTML
         const formData = await context.request.formData();
         
-        // 2. Estraiamo i dati (ho messo delle opzioni in inglese e italiano in base a come si chiamano nel tuo HTML)
         const nome = formData.get('name') || formData.get('nome') || "Nessun nome";
         const email = formData.get('email') || "Nessuna email";
         const dettagli = formData.get('details') || formData.get('message') || formData.get('messaggio') || "Nessun dettaglio";
 
-        // 3. Peschiamo la chiave dalla cassaforte di Cloudflare
         const RESEND_API_KEY = context.env.RESEND_API_KEY;
 
         const emailData = {
             from: "onboarding@resend.dev", 
-            to: "tuamail@gmail.com", // Ricordati di rimettere la tua email qui!
+            
+            // INSERISCI ESATTAMENTE QUESTA EMAIL:
+            to: "novus.ateliers@gmail.com", 
+            
             subject: `Novus Ateliers: Nuova Richiesta da ${nome}`,
             html: `
                 <div style="font-family: sans-serif; color: #101010; line-height: 1.6;">
@@ -41,11 +41,10 @@ export async function onRequestPost(context) {
             throw new Error(`Errore Resend: ${errorResponse}`);
         }
 
-        // Risposta di successo al browser
-        return new Response(JSON.stringify({ success: true, message: "Email inviata con successo!" }), {
-            headers: { 'Content-Type': 'application/json' },
-            status: 200
-        });
+        // AGGIORNAMENTO: Invece di mostrare la pagina nera con il testo JSON,
+        // reindirizziamo l'utente direttamente alla home page del sito
+        const url = new URL(context.request.url);
+        return Response.redirect(url.origin, 303);
 
     } catch (error) {
         return new Response(JSON.stringify({ error: error.message }), {
