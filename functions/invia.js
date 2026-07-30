@@ -1,23 +1,19 @@
 export async function onRequestPost(context) {
     try {
-        // 1. Legge i dati inviati dal tuo form (Nome, Email, Dettagli)
         const input = await context.request.json();
         
-        // Se un campo è vuoto, mette un testo di sicurezza
         const nome = input.name || "Nessun nome";
         const email = input.email || "Nessuna email";
         const dettagli = input.details || "Nessun dettaglio";
 
-        // 2. INSERISCI QUI LA TUA CHIAVE API DI RESEND (tra le virgolette)
-        const RESEND_API_KEY = "re_5j4mNP5U_Pv6td5RMj5hPjM3vXnfFFg8z";
+        // ECCO LA MAGIA: Ora prende la chiave dalla cassaforte di Cloudflare!
+        const RESEND_API_KEY = context.env.RESEND_API_KEY;
 
-        // 3. Configura come sarà l'email che riceverai
         const emailData = {
-            // Nota: Finché non verifichi un tuo dominio su Resend, devi usare questa mail di default come mittente
             from: "onboarding@resend.dev", 
             
-            // INSERISCI QUI LA TUA EMAIL DOVE VUOI RICEVERE LE NOTIFICHE
-            to: "novus.ateliers@gmail.com", 
+            // INSERISCI QUI LA TUA EMAIL (Questa va bene in chiaro, non è un segreto)
+            to: "tuamail@gmail.com", 
             
             subject: `Novus Ateliers: Nuova Richiesta da ${nome}`,
             html: `
@@ -32,7 +28,6 @@ export async function onRequestPost(context) {
             `
         };
 
-        // 4. Invia materialmente l'email tramite l'infrastruttura di Resend
         const res = await fetch("https://api.resend.com/emails", {
             method: "POST",
             headers: {
@@ -42,20 +37,17 @@ export async function onRequestPost(context) {
             body: JSON.stringify(emailData)
         });
 
-        // Controlla se Resend ha dato un errore
         if (!res.ok) {
             const errorResponse = await res.text();
             throw new Error(`Errore Resend: ${errorResponse}`);
         }
 
-        // Risposta di successo che sblocca il form sul sito
-        return new Response(JSON.stringify({ success: true, message: "Email inviata con successo" }), {
+        return new Response(JSON.stringify({ success: true, message: "Email inviata" }), {
             headers: { 'Content-Type': 'application/json' },
             status: 200
         });
 
     } catch (error) {
-        // Se qualcosa va storto, avvisa il sito
         return new Response(JSON.stringify({ error: error.message }), {
             headers: { 'Content-Type': 'application/json' },
             status: 500
