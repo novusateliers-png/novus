@@ -13,7 +13,7 @@ export async function onRequestPost(context) {
             from: "onboarding@resend.dev", 
             
             // INSERISCI QUI LA TUA EMAIL (Questa va bene in chiaro, non è un segreto)
-            to: "tuamail@gmail.com", 
+            to: "novus.ateliers@gmail.com", 
             
             subject: `Novus Ateliers: Nuova Richiesta da ${nome}`,
             html: `
