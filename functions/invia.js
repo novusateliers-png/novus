@@ -38,53 +38,83 @@ export async function onRequestPost(context) {
             throw new Error(`Errore Resend: ${errorResponse}`);
         }
 
-        // LA SOLUZIONE: Una pagina di ringraziamento elegante in HTML
+        // PAGINA DI SUCCESSO PREMIUM
         const successHTML = `
         <!DOCTYPE html>
         <html lang="it">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Richiesta Ricevuta - Novus Ateliers</title>
+            <title>Richiesta Ricevuta | Novus Ateliers</title>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
             <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
                 body { 
-                    font-family: 'Helvetica Neue', Arial, sans-serif; 
-                    background-color: #101010; 
+                    font-family: 'Montserrat', sans-serif; 
+                    background-color: #050505; 
                     color: #ffffff; 
                     display: flex; 
                     align-items: center; 
                     justify-content: center; 
-                    height: 100vh; 
-                    margin: 0; 
+                    min-height: 100vh; 
                     text-align: center; 
                 }
-                .box { 
-                    max-width: 500px; 
-                    padding: 40px; 
-                    border: 1px solid #333; 
-                    border-radius: 8px; 
-                    background: #1a1a1a; 
+                .container {
+                    max-width: 600px;
+                    padding: 40px 20px;
+                    animation: fadeIn 1s ease-out forwards;
+                    opacity: 0;
+                    transform: translateY(20px);
                 }
-                h1 { color: #B29054; margin-bottom: 20px; font-weight: normal; }
-                p { font-size: 1.1em; line-height: 1.6; color: #cccccc; margin-bottom: 30px; }
+                @keyframes fadeIn {
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .icon {
+                    font-size: 48px;
+                    color: #B29054;
+                    margin-bottom: 24px;
+                }
+                h1 { 
+                    font-size: 26px;
+                    font-weight: 400;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: #B29054; 
+                    margin-bottom: 16px; 
+                }
+                p { 
+                    font-size: 15px; 
+                    font-weight: 300;
+                    line-height: 1.8; 
+                    color: #a0a0a0; 
+                    margin-bottom: 40px; 
+                }
+                strong { color: #ffffff; font-weight: 500; }
                 .btn { 
                     display: inline-block; 
-                    padding: 12px 24px; 
-                    background-color: #B29054; 
-                    color: #101010; 
+                    padding: 14px 32px; 
+                    background-color: transparent; 
+                    color: #B29054; 
                     text-decoration: none; 
-                    border-radius: 4px; 
-                    font-weight: bold; 
-                    transition: background 0.3s; 
+                    border: 1px solid #B29054;
+                    font-size: 13px;
+                    font-weight: 500; 
+                    letter-spacing: 1.5px;
+                    text-transform: uppercase;
+                    transition: all 0.4s ease; 
                 }
-                .btn:hover { background-color: #937644; }
+                .btn:hover { 
+                    background-color: #B29054; 
+                    color: #050505; 
+                }
             </style>
         </head>
         <body>
-            <div class="box">
-                <h1>Richiesta Ricevuta!</h1>
-                <p>Grazie per averci contattato, <strong>${nome}</strong>.<br>Abbiamo ricevuto i dettagli del tuo progetto e a breve ti contatteremo.</p>
-                <a href="/" class="btn">Torna al Sito</a>
+            <div class="container">
+                <div class="icon">✓</div>
+                <h1>Richiesta Ricevuta</h1>
+                <p>Grazie per averci contattato, <strong>${nome}</strong>.<br>Abbiamo ricevuto i dettagli del tuo progetto e il nostro team ti risponderà al più presto.</p>
+                <a href="/" class="btn">Ritorna alla Home</a>
             </div>
         </body>
         </html>
@@ -96,23 +126,32 @@ export async function onRequestPost(context) {
         });
 
     } catch (error) {
-        // Messaggio di errore in HTML nel caso qualcosa vada storto
+        // PAGINA DI ERRORE PREMIUM
         const errorHTML = `
         <!DOCTYPE html>
         <html lang="it">
         <head>
             <meta charset="UTF-8">
-            <title>Errore - Novus Ateliers</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Errore | Novus Ateliers</title>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
             <style>
-                body { font-family: sans-serif; background-color: #101010; color: #fff; text-align: center; padding: 50px; }
-                h1 { color: #ff5555; }
-                a { color: #B29054; text-decoration: none; }
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Montserrat', sans-serif; background-color: #050505; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
+                .container { max-width: 600px; padding: 40px 20px; animation: fadeIn 1s ease-out forwards; }
+                @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+                h1 { font-size: 26px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; color: #ff5555; margin-bottom: 16px; }
+                p { font-size: 15px; font-weight: 300; line-height: 1.8; color: #a0a0a0; margin-bottom: 40px; }
+                .btn { display: inline-block; padding: 14px 32px; background-color: transparent; color: #B29054; text-decoration: none; border: 1px solid #B29054; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.4s ease; }
+                .btn:hover { background-color: #B29054; color: #050505; }
             </style>
         </head>
         <body>
-            <h1>Qualcosa è andato storto</h1>
-            <p>Si è verificato un errore durante l'invio. Riprova più tardi.</p>
-            <a href="/">Torna al Sito</a>
+            <div class="container">
+                <h1>Qualcosa è andato storto</h1>
+                <p>Si è verificato un errore tecnico durante l'invio del messaggio. Ti preghiamo di riprovare tra qualche minuto.</p>
+                <a href="/" class="btn">Ritorna alla Home</a>
+            </div>
         </body>
         </html>
         `;
