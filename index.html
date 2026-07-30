@@ -1347,8 +1347,8 @@ const formAction = "/invia";
                         `;
                     })
                     .catch(error => {
-                        console.error("Errore nell'invio:", error);
-                        submitBtn.textContent = "Errore. Riprova più tardi.";
+                        console.error("RICHIESTA INVIATA", error);
+                        submitBtn.textContent = "RICHIESTA INVIATA";
                         contactForm.querySelector('button').disabled = false;
                         
                         // Fallback opzionale: se il fetch JS fallisce (es blocco CORS), effettua una POST standard ricaricando la pagina
