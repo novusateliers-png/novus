@@ -1411,57 +1411,59 @@
                 }
             }, { passive: true });
 
-            /* --- 5. Validazione e Invio Form tramite FormSubmit --- */
-            const contactForm = document.querySelector('.js-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const submitBtn = contactForm.querySelector('.btn-submit span');
-                    
-                    submitBtn.textContent = "Invio in corso...";
-                    contactForm.querySelector('button').disabled = true;
+          /* --- 5. Validazione e Invio Form tramite Cloudflare Worker --- */
+    const contactForm = document.querySelector('.js-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = contactForm.querySelector('.btn-submit span');
+            
+            submitBtn.textContent = "Invio in corso...";
+            contactForm.querySelector('button').disabled = true;
 
-                    const formData = new FormData(contactForm);
-                    const formDataObj = Object.fromEntries(formData.entries());
-                    
-                    const formAction = `https://formsubmit.co/ajax/${SITE_CONFIG.email}`;
+            const formData = new FormData(contactForm);
+            const formDataObj = Object.fromEntries(formData.entries());
+            
+            // Endpoint del tuo Cloudflare Worker. 
+            // Se il file si trova in "functions/invia.js", il percorso sarà "/invia"
+            const formAction = '/invia';
 
-                    fetch(formAction, {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(formDataObj)
-                    })
-                    .then(response => {
-                        if (!response.ok) throw new Error("Errore Network");
-                        return response.json();
-                    })
-                    .then(data => {
-                        contactForm.parentElement.innerHTML = `
-                            <div style="padding: 2rem 0; text-align: left; opacity: 0; animation: fadeIn 0.8s ease forwards;">
-                                <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }</style>
-                                <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(178, 144, 84, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" style="width: 24px; height: 24px;"><path d="M20 6L9 17l-5-5"/></svg>
-                                </div>
-                                <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Richiesta Inviata.</h3>
-                                <p style="color: #444; font-size: 1rem; font-weight: 400; line-height: 1.6;">I tuoi dettagli sono stati trasmessi con successo a ${SITE_CONFIG.email}. Un nostro Architect analizzerà la tua richiesta e ti contatterà a breve.</p>
-                            </div>
-                        `;
-                    })
-                    .catch(error => {
-                        console.error("FormSubmit Error:", error);
-                        submitBtn.textContent = "Errore. Riprova più tardi.";
-                        contactForm.querySelector('button').disabled = false;
-                        
-                        setTimeout(() => {
-                            contactForm.action = `https://formsubmit.co/${SITE_CONFIG.email}`;
-                            contactForm.submit();
-                        }, 2000);
-                    });
-                });
-            }
+            fetch(formAction, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formDataObj)
+            })
+            .then(async response => {
+                // Gestisce sia errori di rete che risposte non-200 dal Worker
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.errore || "Errore di connessione al server");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Messaggio di successo
+                contactForm.parentElement.innerHTML = `
+                    <div style="padding: 2rem 0; text-align: left; opacity: 0; animation: fadeIn 0.8s ease forwards;">
+                        <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }</style>
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(178, 144, 84, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" style="width: 24px; height: 24px;"><path d="M20 6L9 17l-5-5"/></svg>
+                        </div>
+                        <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Richiesta Inviata.</h3>
+                        <p style="color: #444; font-size: 1rem; font-weight: 400; line-height: 1.6;">I tuoi dettagli sono stati trasmessi con successo a novus.ateliers@gmail.com. Un nostro Architect analizzerà la tua richiesta e ti contatterà a breve.</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error("Worker Error:", error);
+                submitBtn.textContent = "Errore. Riprova più tardi.";
+                contactForm.querySelector('button').disabled = false;
+            });
+        });
+    }
 
             /* --- 6. Nuova Gestione FAQ (Split View) --- */
             const faqTabs = document.querySelectorAll('.js-faq-tab');
