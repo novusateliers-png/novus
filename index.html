@@ -1411,56 +1411,42 @@
                 }
             }, { passive: true });
 
-          /* --- 5. Validazione e Invio Form tramite Cloudflare Worker --- */
+     /* --- 5. Validazione e Invio Form tramite Cloudflare Worker (Versione HTML) --- */
     const contactForm = document.querySelector('.js-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const submitBtn = contactForm.querySelector('.btn-submit span');
+            e.preventDefault(); // Blocca il caricamento standard per mostrare l'animazione del bottone
+            
+            const btn = contactForm.querySelector('button');
+            const submitBtn = contactForm.querySelector('.btn-submit span') || btn;
             
             submitBtn.textContent = "Invio in corso...";
-            contactForm.querySelector('button').disabled = true;
+            if (btn) btn.disabled = true;
 
+            // Raccoglie i dati direttamente come FormData (formato richiesto dal nuovo worker)
             const formData = new FormData(contactForm);
-            const formDataObj = Object.fromEntries(formData.entries());
             
-            // Endpoint del tuo Cloudflare Worker. 
-            // Se il file si trova in "functions/invia.js", il percorso sarà "/invia"
+            // Endpoint del tuo Cloudflare Worker
             const formAction = '/invia';
 
+            // Invia la richiesta fetch senza convertire in JSON
             fetch(formAction, {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(formDataObj)
+                body: formData // Fetch imposta automaticamente gli header corretti per FormData
             })
             .then(async response => {
-                // Gestisce sia errori di rete che risposte non-200 dal Worker
-                if (!response.ok) {
-                    const errData = await response.json().catch(() => ({}));
-                    throw new Error(errData.errore || "Errore di connessione al server");
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Messaggio di successo
-                contactForm.parentElement.innerHTML = `
-                    <div style="padding: 2rem 0; text-align: left; opacity: 0; animation: fadeIn 0.8s ease forwards;">
-                        <style>@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }</style>
-                        <div style="width: 50px; height: 50px; border-radius: 50%; background: rgba(178, 144, 84, 0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2" style="width: 24px; height: 24px;"><path d="M20 6L9 17l-5-5"/></svg>
-                        </div>
-                        <h3 style="font-family: var(--font-serif); font-size: 2.5rem; line-height: 1; color: var(--color-dark); margin-bottom: 1rem; font-weight: 400;">Richiesta Inviata.</h3>
-                        <p style="color: #444; font-size: 1rem; font-weight: 400; line-height: 1.6;">I tuoi dettagli sono stati trasmessi con successo a novus.ateliers@gmail.com. Un nostro Architect analizzerà la tua richiesta e ti contatterà a breve.</p>
-                    </div>
-                `;
+                // Il worker restituisce sempre l'HTML (sia in caso di successo 200 che errore 500)
+                const htmlResponse = await response.text();
+                
+                // Sostituisce l'intera pagina corrente con la schermata Premium generata dal Worker
+                document.open();
+                document.write(htmlResponse);
+                document.close();
             })
             .catch(error => {
                 console.error("Worker Error:", error);
-                submitBtn.textContent = "Errore. Riprova più tardi.";
-                contactForm.querySelector('button').disabled = false;
+                submitBtn.textContent = "Errore di connessione. Riprova.";
+                if (btn) btn.disabled = false;
             });
         });
     }
